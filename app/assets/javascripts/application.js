@@ -12,4 +12,23 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require bootstrap-datepicker.js
+//= require locales/bootstrap-datepicker.it.js
+
+
+
+$(function() {
+  $('#invoice_date').datepicker({
+    format: 'dd.mm.yyyy',
+    autoclose: true,
+    language: 'it'
+  });
+
+  $('.d input').datepicker({
+    format: 'MM yyyy',
+    autoclose: true,
+    language: 'it',
+    minViewMode: 1,
+    startView: 1
+  });
+});

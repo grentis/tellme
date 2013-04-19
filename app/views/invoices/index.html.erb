@@ -1,0 +1,26 @@
+<%= form_for @invoice do |f| %>
+  <p>
+    <%= f.label :amount %><br />
+    <%= f.text_field :amount %>
+    <% @invoice.errors.messages[:amount].each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </p>
+  <p>
+    <%= f.label :date %><br />
+    <%= f.text_field :date, value: @invoice.date.strftime("%d.%m.%Y") %>
+    <% @invoice.errors.messages[:date].each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </p>
+  <%= f.fields_for :payments do |builder| %>
+  <% builder.object.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+  <p class="d">
+    <%= builder.label :v_date %><br />
+    <%= builder.text_field :v_date %>
+  </p>
+  <% end %>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

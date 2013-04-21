@@ -5,7 +5,7 @@ class CreateInvoices < ActiveRecord::Migration
       t.integer :client_id, null: false
       t.string :number, null: false
       t.date :date, null: false
-      t.decimal :amount, null: false, default: 0
+      t.decimal :amount, null: false
       t.text :note
     end
   end

@@ -1,5 +1,19 @@
 @import "compass_twitter_bootstrap";
 
-body {
-  font-size:(16px - 2px);
+.form-cliente {
+  .input-xxlarge {
+    width:510px;
+  }
+
+  .iva, .cf {
+    input {
+      text-transform: uppercase;
+    }
+  }
+
+  .currency {
+    input {
+      text-align: right;
+    }
+  }
 }

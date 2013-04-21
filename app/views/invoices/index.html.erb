@@ -1,26 +1,66 @@
+<div class="container">
 <%= form_for @invoice do |f| %>
-  <p>
-    <%= f.label :amount %><br />
-    <%= f.text_field :amount %>
-    <% @invoice.errors.messages[:amount].each do |msg| %>
-      <p><%= msg %></p>
-    <% end %>
-  </p>
-  <p>
-    <%= f.label :date %><br />
-    <%= f.text_field :date, value: @invoice.date.strftime("%d.%m.%Y") %>
-    <% @invoice.errors.messages[:date].each do |msg| %>
-      <p><%= msg %></p>
-    <% end %>
-  </p>
+  <div class="row">
+    <span class="span12">
+      <%= f.field :amount, class: 'control-group' do %>
+        <%= f.label :client_id %>
+        <%= f.collection_select :client_id, Client.all, :id, :name, include_blank: true %>
+        <%= f.errors :client_id, class: 'help-inline' %>
+        <a href="#"><i class="icon-plus"></i></a>
+      <% end %>
+    </span>
+  </div>
+  <div class="row">
+    <span class="span4">
+      <%= f.field :number, class: 'control-group' do %>
+        <%= f.label :number %>
+        <%= f.text_field :number, class: 'input-mini' %>
+        <%= f.errors :number, class: 'help-inline' %>
+      <% end %>
+    </span>
+    <span class="span4">
+      <%= f.field :date, class: 'control-group' do %>
+        <%= f.label :date %>
+        <div class="input-append date">
+          <%= f.text_field :date, class: 'input-small', value: ( @invoice.date.strftime("%d.%m.%Y") unless @invoice.date.blank? ) %>
+          <span class="remove add-on"><i class="icon-remove"></i></span>
+        </div>
+        <%= f.errors :date, class: 'help-inline' %>
+      <% end %>
+    </span>
+    <span class="span4">
+      <%= f.field :amount, class: 'control-group' do %>
+        <%= f.label :amount %>
+        <div class="input-append date">
+          <%= f.currency_field :amount, class: 'input-small' %>
+          <span class="add-on">&euro;</span>
+        </div>
+        <%= f.errors :amount, class: 'help-inline' %>
+      <% end %>
+    </span>
+  </div>
+  <div class="row">
+    <span class="span6">data</span>
+    <span class="span6">importo</span>
+  </div>
   <%= f.fields_for :payments do |builder| %>
-  <% builder.object.errors.full_messages.each do |msg| %>
-    <p><%= msg %></p>
+    <div class="row">
+      <span class="span6">
+        <span class="input-append date">
+          <%= builder.currency_field :value, class: 'input-small' %>
+          <span class="add-on">&euro;</span>
+        </span>
+        <%= builder.errors :value %>
+      </span>
+      <span class="span6">
+        <%= builder.text_field :v_date, class: 'input-medium month-year' %>
+        <%= builder.errors :v_date %>
+      </span>
+    </div>
   <% end %>
-  <p class="d">
-    <%= builder.label :v_date %><br />
-    <%= builder.text_field :v_date %>
-  </p>
-  <% end %>
-  <p><%= f.submit "Submit" %></p>
+  <div class="form-actions">
+    <%= f.button "Salva", type: :submit, class: 'btn btn-info' %>
+    <%= link_to "Annulla",  dashboard_index_path, class: 'btn' %>
+  </div>
 <% end %>
+</div>

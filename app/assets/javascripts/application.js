@@ -12,8 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-datepicker.js
-//= require locales/bootstrap-datepicker.it.js
+//= require bootstrap
+//= require bootstrap-datepicker
+//= require locales/bootstrap-datepicker.it
+//= require jquery.numeric
 
 
 
@@ -24,11 +26,18 @@ $(function() {
     language: 'it'
   });
 
-  $('.d input').datepicker({
+  $('input.month-year').datepicker({
     format: 'MM yyyy',
     autoclose: true,
     language: 'it',
     minViewMode: 1,
     startView: 1
   });
+
+  $('.remove').on('click', function(e){
+    $(this).prev().val(null);
+    e.preventDefault();
+    return false;
+  });
+
 });

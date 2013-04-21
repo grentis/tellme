@@ -29,12 +29,12 @@ ActiveRecord::Schema.define(:version => 20130418221641) do
   end
 
   create_table "invoices", :force => true do |t|
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-    t.integer  "client_id",                   :null => false
-    t.string   "number",                      :null => false
-    t.date     "date",                        :null => false
-    t.decimal  "amount",     :default => 0.0, :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "client_id",  :null => false
+    t.string   "number",     :null => false
+    t.date     "date",       :null => false
+    t.decimal  "amount",     :null => false
     t.text     "note"
   end
 
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(:version => 20130418221641) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.integer  "invoice_id",                    :null => false
-    t.decimal  "value",      :default => 0.0,   :null => false
+    t.decimal  "value",                         :null => false
     t.integer  "year",                          :null => false
     t.integer  "month",                         :null => false
     t.boolean  "paid",       :default => false, :null => false

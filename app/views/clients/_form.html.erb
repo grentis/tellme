@@ -1,0 +1,73 @@
+<%= form_for @client, html: { class: 'form-cliente' } do |f| %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <div class="control-group">
+      <%= f.label :name, 'Nome' %>
+      <%= f.text_field :name, class: 'input-xxlarge' %>
+      <%= f.errors :name, class: 'help-inline' %>
+    </div>
+    <div class="control-group">
+      <%= f.label :address, 'Indirizzo' %>
+      <%= f.text_area :address, rows: 2, class: 'input-xxlarge' %>
+      <%= f.errors :address, class: 'help-inline' %>
+    </div>
+    <div class="control-group">
+      <div class="row">
+        <span class="span3 iva">
+          <%= f.label :iva, 'IVA' %>
+          <%= f.text_field :iva %>
+          <%= f.errors :iva, class: 'help-inline' %>
+        </span>
+        <span class="span3 cf">
+          <%= f.label :cf, 'Codice fiscale' %>
+          <%= f.text_field :cf %>
+          <%= f.errors :cf, class: 'help-inline' %>
+        </span>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :payment_type, 'Tipo di pagamento' %>
+      <%= f.text_field :payment_type, class: 'input-xxlarge' %>
+      <%= f.errors :payment_type, class: 'help-inline' %>
+    </div>
+    <div class="control-group">
+      <%= f.label :bank, 'Banca' %>
+      <%= f.text_area :bank, rows: 2, class: 'input-xxlarge' %>
+      <%= f.errors :bank, class: 'help-inline' %>
+    </div>
+    <div class="control-group">
+      <div class="row">
+        <span class="span1">
+          <%= f.label :abi, 'ABI' %>
+          <%= f.text_field :abi, class: 'input-mini' %>
+          <%= f.errors :abi, class: 'help-inline' %>
+        </span>
+        <span class="span1">
+          <%= f.label :cab, 'CAB' %>
+          <%= f.text_field :cab, class: 'input-mini' %>
+          <%= f.errors :cab, class: 'help-inline' %>
+        </span>
+        <span class="span2 offset2 currency">
+          <%= f.label :hourly_cost, 'Costo orario' %>
+          <span class="input-append">
+            <%= f.currency_field :hourly_cost, class: 'input-small' %>
+            <span class="add-on">&euro;</span>
+          </span>
+          <%= f.errors :hourly_cost, class: 'help-inline' %>
+        </span>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :note %>
+      <%= f.text_area :note, rows: 5, class: 'input-xxlarge' %>
+      <%= f.errors :note, class: 'help-inline' %>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <%= link_to "Annulla",  dashboard_index_path, class: 'btn' %>
+    <%= f.button "Salva", type: :submit, class: 'btn btn-info' %>
+  </div>
+<% end %>

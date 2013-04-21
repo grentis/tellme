@@ -1,12 +1,14 @@
 class Invoice < ActiveRecord::Base
-  attr_accessible :amount, :number, :date, :payments_attributes
+  attr_accessible :amount, :number, :date, :payments_attributes, :client_id
 
   has_many :payments, order: [:year, :month], dependent: :destroy
   belongs_to :client
 
   validates :client, presence: true
+  validates :client_id, presence: true
   validates :number, presence: true
   validates :date, presence: true
+  validates :amount, presence: true
 
   accepts_nested_attributes_for :payments, allow_destroy: true
 
@@ -18,6 +20,10 @@ class Invoice < ActiveRecord::Base
 
   def total_payments
     self.payments.sum(:value)
+  end
+
+  def amount=(amount)
+    write_attribute(:amount, amount.to_s.gsub(',', '.'))
   end
 
   def num_payments

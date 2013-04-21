@@ -1,0 +1,31 @@
+
+Qui visualizzo quelli scaduti
+<table class="table">
+  <% @expired.each do |p| %>
+    <tr>
+      <td><%= p.client.name %></td>
+      <td><%= p.invoice.number %></td>
+      <td><%= p.invoice.date %></td>
+      <td><%= p.value %></td>
+    </tr>
+  <% end %>
+</table>
+
+
+
+Elenco clienti
+<table class="table">
+  <% @clients.each do |c| %>
+    <tr>
+      <td><%= c.name %></td>
+      <td><%= link_to 'Modifica', edit_client_path(c), remote: true  %></td>
+      <td><%= link_to 'Elimina', client_path(c), method: :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Nuovo cliente', new_client_path, remote: true %>
+
+<br/>
+
+<%= link_to 'Nuova fattura', new_invoice_path %>

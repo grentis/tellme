@@ -21,7 +21,11 @@ class Payment < ActiveRecord::Base
   end
 
   def should_be_deleted?
-    self.year.blank? and self.month.blank?
+    self.year.blank? && self.month.blank? && self.value.blank?
+  end
+
+  def value=(value)
+    write_attribute(:value, value.to_s.gsub(',', '.'))
   end
 
   def v_date

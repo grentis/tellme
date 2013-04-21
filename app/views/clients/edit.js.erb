@@ -1,0 +1,1 @@
+$('<div class="modal"></div>').appendTo($('body')).html("<%= escape_javascript(render partial: 'form') %>").on('hidden', function(e) { $(this).remove(); } ).modal();

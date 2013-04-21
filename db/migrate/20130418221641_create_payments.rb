@@ -3,7 +3,7 @@ class CreatePayments < ActiveRecord::Migration
     create_table :payments do |t|
       t.timestamps
       t.integer :invoice_id, null: false
-      t.decimal :value, null: false, default: 0
+      t.decimal :value, null: false
       t.integer :year, null: false
       t.integer :month, null: false
       t.boolean :paid, null: false, default: false

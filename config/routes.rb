@@ -25,6 +25,8 @@ Tellme::Application.routes.draw do
   #     end
   #   end
 
+  resources :dashboard
+  resources :clients
   resources :invoices
 
   # Sample resource route with sub-resources:

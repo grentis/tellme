@@ -1,0 +1,64 @@
+<%= form_for @invoice, remote: true, html: { class: 'form-invoice' } do |f| %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3><%= ["edit", "update"].include?( params[:action] ) ? 'Modifica fattura' : 'Nuova fattura' %></h3>
+  </div>
+  <div class="modal-body">
+    <div class="control-group">
+      <%= f.label :client_id %>
+      <%= f.collection_select :client_id, Client.all, :id, :name, include_blank: true %>
+      <%= f.errors :client_id, class: 'help-inline' %>
+      <a href="#"><i class="icon-plus"></i></a>
+    </div>
+    <div class="control-group">
+      <div class="row">
+        <span class="span3 iva">
+          <%= f.label :number %>
+          <%= f.text_field :number, class: 'input-mini' %>
+          <%= f.errors :number, class: 'help-inline' %>
+        </span>
+        <span class="span3 cf">
+          <%= f.label :date %>
+          <div class="input-append date">
+            <%= f.text_field :date, class: 'input-small', value: ( @invoice.date.strftime("%d.%m.%Y") unless @invoice.date.blank? ) %>
+            <span class="remove add-on"><i class="icon-remove"></i></span>
+          </div>
+          <%= f.errors :date, class: 'help-inline' %>
+        </span>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :amount %>
+      <div class="input-append date">
+        <%= f.currency_field :amount, class: 'input-small' %>
+        <span class="add-on">&euro;</span>
+      </div>
+      <%= f.errors :amount, class: 'help-inline' %>
+    </div>
+    <div class="control-group">
+      <div class="row">
+        <span class="span3">Data</span>
+        <span class="span3">Importo</span>
+      </div>
+      <%= f.fields_for :payments do |builder| %>
+        <div class="row">
+          <span class="span3">
+            <span class="input-append date">
+              <%= builder.currency_field :value, class: 'input-small' %>
+              <span class="add-on">&euro;</span>
+            </span>
+            <%= builder.errors :value %>
+          </span>
+          <span class="span3">
+            <%= builder.text_field :v_date, class: 'input-medium month-year' %>
+            <%= builder.errors :v_date %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <%= link_to "Annulla",  cancel_invoices_path, class: 'btn', remote: true %>
+    <%= f.button "Salva", type: :submit, class: 'btn btn-info' %>
+  </div>
+<% end %>

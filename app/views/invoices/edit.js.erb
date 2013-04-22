@@ -1,5 +1,8 @@
-$('<div class="modal"></div>').appendTo($('body')).html("<%= escape_javascript(render partial: 'form') %>").on('hidden', function(e) { $(this).remove(); } ).modal();
-
+var $client_form = $('#invoice-form');
+if ($client_form.length <= 0) {
+  $client_form = $('<div class="modal" id="invoice-form"></div>').appendTo($('body'))  
+}
+$client_form.html("<%= escape_javascript(render partial: 'form') %>").on('hidden', function(e) { $(this).remove(); } ).modal();
 
 $('.currency input').on('keydown', function(e){
   var getPos = function(o){

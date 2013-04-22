@@ -1,4 +1,16 @@
 Tellme::Application.routes.draw do
+
+  class OnlyAjaxRequest
+    def matches?(request) 
+      request.xhr?
+    end
+  end
+
+  class OnlyHttpRequest
+    def matches?(request) 
+      !request.xhr?
+    end
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -26,8 +38,22 @@ Tellme::Application.routes.draw do
   #   end
 
   resources :dashboard
-  resources :clients
-  resources :invoices
+
+  constraints OnlyAjaxRequest.new do
+    resources :clients, only: [ :new, :edit, :cancel, :create, :update ] do
+      collection do
+        get :cancel
+      end
+    end
+
+    resources :invoices, only: [ :new, :edit, :cancel, :create, :update ] do
+      collection do
+        get :cancel
+      end
+    end
+  end
+
+  resources :clients, only: [:destroy ], constraints: OnlyHttpRequest.new
 
   # Sample resource route with sub-resources:
   #   resources :products do
@@ -52,7 +78,7 @@ Tellme::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'dashboard#index'
 
   # See how all your routes lay out with "rake routes"
 

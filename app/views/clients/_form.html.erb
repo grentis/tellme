@@ -1,7 +1,7 @@
-<%= form_for @client, html: { class: 'form-cliente' } do |f| %>
+<%= form_for @client, remote: true, html: { class: 'form-cliente' } do |f| %>
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Modal header</h3>
+    <h3><%= ["edit", "update"].include?( params[:action] ) ? 'Modifica cliente' : 'Nuovo cliente' %></h3>
   </div>
   <div class="modal-body">
     <div class="control-group">
@@ -67,7 +67,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <%= link_to "Annulla",  dashboard_index_path, class: 'btn' %>
+    <%= link_to "Annulla",  cancel_clients_path, class: 'btn', remote: true %>
     <%= f.button "Salva", type: :submit, class: 'btn btn-info' %>
   </div>
 <% end %>

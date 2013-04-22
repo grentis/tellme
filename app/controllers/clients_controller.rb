@@ -1,6 +1,7 @@
 class ClientsController < ApplicationController
   def new
     @client = Client.new
+    render action: :edit
   end
 
   def edit
@@ -12,8 +13,11 @@ class ClientsController < ApplicationController
     if @client.update_attributes(params[:client])
       redirect_to dashboard_index_path
     else
-      render :action => 'new'
+      render action: :edit
     end
+  end
+
+  def cancel
   end
 
   def create
@@ -21,7 +25,7 @@ class ClientsController < ApplicationController
     if @client.save
       redirect_to dashboard_index_path
     else
-      render :action => "new"
+      render action: :edit
     end
   end
 

@@ -1,13 +1,14 @@
 class InvoicesController < ApplicationController
-  def index
-    @invoice = Invoice.last
-    (3 - @invoice.payments.count).times { @invoice.payments.build }
-  end
 
   def new
     @invoice = Invoice.new
     3.times { @invoice.payments.build }
-    render action: :index
+    render action: :edit
+  end
+
+  def edit
+    @invoice = Invoice.find(params[:id])
+    (3 - @invoice.payments.count).times { @invoice.payments.build }
   end
 
   def create
@@ -15,16 +16,16 @@ class InvoicesController < ApplicationController
     if @invoice.save
        redirect_to dashboard_index_path
     else
-       render action: :index
+       render action: :edit
     end
   end
 
   def update
     @invoice = Invoice.find(params[:id])
     if @invoice.update_attributes(params[:invoice])
-       redirect_to :action => 'index'
+       redirect_to dashboard_index_path
     else
-       render :action => 'index'
+       render action: :edit
     end
   end
 end

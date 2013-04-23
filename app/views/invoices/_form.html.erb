@@ -6,7 +6,7 @@
   <div class="modal-body">
     <div class="control-group">
       <%= f.label :client_id %>
-      <%= f.collection_select :client_id, Client.all, :id, :name, include_blank: true %>
+      <%= f.select :client_id, options_for_select(Client.all.map{ |c| [ c.name, c.id, { 'data-address' => c.address, 'data-note' => c.note } ] }, @invoice.client_id) %>
       <%= f.errors :client_id, class: 'help-inline' %>
       <%= link_to 'Add', new_client_path, remote: true %>
     </div>

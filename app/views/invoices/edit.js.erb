@@ -1,6 +1,6 @@
 var $client_form = $('#invoice-form');
 if ($client_form.length <= 0) {
-  $client_form = $('<div class="modal" id="invoice-form"></div>').appendTo($('body'))  
+  $client_form = $('<div class="modal container" id="invoice-form"></div>').appendTo($('body'))  
 }
 $client_form.html("<%= escape_javascript(render partial: 'form') %>").on('hidden', function(e) { $(this).remove(); } ).modal();
 
@@ -8,6 +8,26 @@ $('#invoice_date').datepicker({
   format: 'dd.mm.yyyy',
   autoclose: true,
   language: 'it'
+});
+
+$('#invoice_client_id').select2({
+  formatResult: function(state) {
+    if (!state.id) return state.text + "&nbsp;";
+    var $originalOption = $(state.element);
+    var p = "<span>"+state.text+"</span>";
+    p += ($originalOption.data('address') ? ("<span style='display:block;font-size:10px;line-height:16px'>" + $originalOption.data('address') + "</span>") : '')
+    p += ($originalOption.data('note') ? ("<span style='display:block;font-size:10px;line-height:16px;padding-bottom:5px'>" + $originalOption.data('note') + "</span>") : '')
+    return p
+  },
+  formatSelection: function(state) {
+    if (!state.id) return state.text + "&nbsp;";
+    var $originalOption = $(state.element);
+    var p = "<span>"+state.text+"</span>";
+    p += ("<span style='display:block;font-size:10px;line-height:16px'>" + ($originalOption.data('address') ? $originalOption.data('address') : '&nbsp;' ) + "</span>")
+    p += ("<span style='display:block;font-size:10px;line-height:16px;padding-bottom:5px'>" + ($originalOption.data('note') ? $originalOption.data('note') : '&nbsp;') + "</span>")
+    return p
+  },
+  escapeMarkup: function(m) { return m; }
 });
 
 $('input.month-year').datepicker({

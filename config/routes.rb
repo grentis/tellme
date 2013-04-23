@@ -44,6 +44,7 @@ Tellme::Application.routes.draw do
       collection do
         get :cancel
       end
+      resources :invoices, only: [ :new ]
     end
 
     resources :invoices, only: [ :new, :edit, :cancel, :create, :update ] do

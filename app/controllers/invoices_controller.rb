@@ -1,7 +1,7 @@
 class InvoicesController < ApplicationController
 
   def new
-    @invoice = Invoice.new
+    @invoice = Invoice.new( { client_id: params[:client_id] } )
     3.times { @invoice.payments.build }
     render action: :edit
   end
@@ -18,6 +18,9 @@ class InvoicesController < ApplicationController
     else
        render action: :edit
     end
+  end
+
+  def cancel
   end
 
   def update

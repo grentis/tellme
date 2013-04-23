@@ -16,6 +16,9 @@
 //= require bootstrap-datepicker
 //= require locales/bootstrap-datepicker.it
 //= require jquery.numeric
+//= require select2/select2
+//= require bootstrap-modal.js
+//= require bootstrap-modalmanager.js
 
 
 

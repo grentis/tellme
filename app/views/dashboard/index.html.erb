@@ -18,6 +18,7 @@ Elenco clienti
   <% @clients.each do |c| %>
     <tr>
       <td><%= c.name %></td>
+      <td><%= link_to 'Nuova fattura', new_client_invoice_path(c), remote: true  %></td>
       <td><%= link_to 'Modifica', edit_client_path(c), remote: true  %></td>
       <td><%= link_to 'Elimina', client_path(c), method: :delete %></td>
     </tr>

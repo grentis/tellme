@@ -8,7 +8,7 @@
       <%= f.label :client_id %>
       <%= f.collection_select :client_id, Client.all, :id, :name, include_blank: true %>
       <%= f.errors :client_id, class: 'help-inline' %>
-      <a href="#"><i class="icon-plus"></i></a>
+      <%= link_to 'Add', new_client_path, remote: true %>
     </div>
     <div class="control-group">
       <div class="row">
@@ -29,7 +29,7 @@
     </div>
     <div class="control-group">
       <%= f.label :amount %>
-      <div class="input-append date">
+      <div class="input-append currency">
         <%= f.currency_field :amount, class: 'input-small' %>
         <span class="add-on">&euro;</span>
       </div>
@@ -37,14 +37,14 @@
     </div>
     <div class="control-group">
       <div class="row">
-        <span class="span3">Data</span>
         <span class="span3">Importo</span>
+        <span class="span3">Data</span>
       </div>
       <%= f.fields_for :payments do |builder| %>
         <div class="row">
           <span class="span3">
-            <span class="input-append date">
-              <%= builder.currency_field :value, class: 'input-small' %>
+            <span class="input-append currency">
+              <%= builder.currency_field :value, class: 'input-small currency' %>
               <span class="add-on">&euro;</span>
             </span>
             <%= builder.errors :value %>

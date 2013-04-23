@@ -4,6 +4,26 @@ if ($client_form.length <= 0) {
 }
 $client_form.html("<%= escape_javascript(render partial: 'form') %>").on('hidden', function(e) { $(this).remove(); } ).modal();
 
+$('#invoice_date').datepicker({
+  format: 'dd.mm.yyyy',
+  autoclose: true,
+  language: 'it'
+});
+
+$('input.month-year').datepicker({
+  format: 'MM yyyy',
+  autoclose: true,
+  language: 'it',
+  minViewMode: 1,
+  startView: 1
+});
+
+$('.remove').on('click', function(e){
+  $(this).prev().val(null);
+  e.preventDefault();
+  return false;
+});
+
 $('.currency input').on('keydown', function(e){
   var getPos = function(o){
     if (o.createTextRange)

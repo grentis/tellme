@@ -21,6 +21,20 @@ Elenco clienti
       <td><%= link_to 'Modifica', edit_client_path(c), remote: true  %></td>
       <td><%= link_to 'Elimina', client_path(c), method: :delete %></td>
     </tr>
+    <tr>
+      <td colspan="3">
+          <table>
+            <% c.invoices.each do |i| %>
+              <tr>
+                <td><%= i.amount %></td>
+                <td><%= i.date %></td>
+                <td><%= link_to 'Modifica', edit_invoice_path(i), remote: true %></td>
+                <td><%= link_to 'Elimina', invoice_path(i), method: :delete %></td>
+              </tr>
+            <% end %>
+          </table>
+      </td>
+    </tr>
   <% end %>
 </table>
 

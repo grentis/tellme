@@ -1,15 +1,14 @@
 
 Qui visualizzo quelli scaduti
-<table class="table">
   <% @expired.each do |p| %>
-    <tr>
-      <td><%= p.client.name %></td>
-      <td><%= p.invoice.number %></td>
-      <td><%= p.invoice.date %></td>
-      <td><%= p.value %></td>
-    </tr>
+    <div>
+      <span class="label label-important" style="min-width:100px"><%= p.v_date %></span>
+      <span><%= p.client.name %></span>
+      <span><%= p.invoice.number %></span>
+      <span><%= p.invoice.date %></span>
+      <span><%= p.value %></span>
+    </div>
   <% end %>
-</table>
 
 
 

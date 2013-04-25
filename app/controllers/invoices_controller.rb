@@ -14,9 +14,10 @@ class InvoicesController < ApplicationController
   def create
     @invoice = Invoice.new(params[:invoice])
     if @invoice.save
-       redirect_to dashboard_index_path
+      redirect_to dashboard_index_path
     else
-       render action: :edit
+      #(3 - @invoice.payments.size).times { @invoice.payments.build }
+      render action: :edit
     end
   end
 
@@ -28,7 +29,8 @@ class InvoicesController < ApplicationController
     if @invoice.update_attributes(params[:invoice])
        redirect_to dashboard_index_path
     else
-       render action: :edit
+      #(3 - @invoice.payments.size).times { @invoice.payments.build }
+      render action: :edit
     end
   end
 end

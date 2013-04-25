@@ -1,10 +1,7 @@
 @import "compass_twitter_bootstrap";
 
 .form-cliente {
-  .input-xxlarge {
-    width:510px;
-  }
-
+  
   .iva, .cf {
     input {
       text-transform: uppercase;
@@ -26,4 +23,13 @@
 
 .select2-container a.select2-choice {
   height:auto;
+}
+
+
+textarea.note {
+  height:20px;
+}
+
+.marked_for_destruction {
+  display: none;
 }

@@ -1,5 +1,5 @@
 class Invoice < ActiveRecord::Base
-  attr_accessible :amount, :number, :date, :payments_attributes, :client_id
+  attr_accessible :amount, :number, :date, :payments_attributes, :client_id, :note
 
   has_many :payments, order: [:year, :month], dependent: :destroy
   belongs_to :client
@@ -46,7 +46,7 @@ class Invoice < ActiveRecord::Base
   private
     def mark_payments_for_removal
       self.payments.each do |p|
-        p.mark_for_destruction if p.should_be_deleted?
+        p.destroy if p.should_be_deleted?
       end
     end
 end

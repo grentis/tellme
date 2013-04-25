@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/ryanb/nested_form.git
+  revision: a25eebe8205e4e63899873b716535def6c1f5a9d
+  specs:
+    nested_form (0.3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -61,7 +67,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mime-types (1.22)
+    mime-types (1.23)
     multi_json (1.7.2)
     pg (0.15.1)
     polyglot (0.3.3)
@@ -90,7 +96,7 @@ GEM
     rake (10.0.4)
     rdoc (3.12.2)
       json (~> 1.4)
-    sass (3.2.7)
+    sass (3.2.8)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -118,6 +124,7 @@ DEPENDENCIES
   compass-rails
   compass_twitter_bootstrap
   jquery-rails
+  nested_form!
   pg
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)

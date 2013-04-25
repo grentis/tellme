@@ -13,12 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require bootstrap-modal
+//= require bootstrap-modalmanager
 //= require bootstrap-datepicker
 //= require locales/bootstrap-datepicker.it
-//= require jquery.numeric
 //= require select2/select2
-//= require bootstrap-modal.js
-//= require bootstrap-modalmanager.js
+//= require jquery_nested_form
 
 
 
@@ -41,6 +41,33 @@ $(function() {
     $(this).prev().val(null);
     e.preventDefault();
     return false;
+  });
+
+  $(document).on('focus.tellme', 'textarea.note', function(e){
+    var $this = $(this);
+    var eh = $this.data('expanded-height') || '60px';
+    $this.stop().animate({
+      height: eh
+    });
+  }).on('blur.tellme', 'textarea.note', function(e){
+    var $this = $(this);
+    var eh = $this.data('collapsed-height') || '20px';
+    $this.stop().animate({
+      height: eh
+    });
+  }).on('nested:fieldAdded', function(event){
+    // this field was just inserted into your form
+    var field = event.field; 
+    // it's a jQuery object already! Now you can find date input
+    var dateField = field.find('.month-year');
+    // and activate datepicker on it
+    dateField.datepicker({
+      format: 'MM yyyy',
+      autoclose: true,
+      language: 'it',
+      minViewMode: 1,
+      startView: 1
+    });
   });
 
 });

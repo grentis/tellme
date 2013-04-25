@@ -5,55 +5,71 @@
   </div>
   <div class="modal-body">
     <div class="control-group">
-      <%= f.label :name, 'Nome' %>
-      <%= f.text_field :name, class: 'input-xxlarge' %>
-      <%= f.errors :name, class: 'help-inline' %>
+      <div class="row-fluid">
+        <span class="span12">
+          <%= f.label :name, 'Nome' %>
+          <%= f.text_field :name, class: 'span12' %>
+          <%= f.errors :name, class: 'help-inline' %>
+        </span>
+      </div>
     </div>
     <div class="control-group">
-      <%= f.label :address, 'Indirizzo' %>
-      <%= f.text_area :address, rows: 2, class: 'input-xxlarge' %>
-      <%= f.errors :address, class: 'help-inline' %>
+      <div class="row-fluid">
+        <span class="span12">
+          <%= f.label :address, 'Indirizzo' %>
+          <%= f.text_area :address, class: 'span12 note' %>
+          <%= f.errors :address, class: 'help-inline' %>
+        </span>
+      </div>
     </div>
     <div class="control-group">
-      <div class="row">
-        <span class="span3 iva">
+      <div class="row-fluid">
+        <span class="span4 iva">
           <%= f.label :iva, 'IVA' %>
-          <%= f.text_field :iva %>
+          <%= f.text_field :iva, class: 'span12' %>
           <%= f.errors :iva, class: 'help-inline' %>
         </span>
-        <span class="span3 cf">
+        <span class="span4 cf">
           <%= f.label :cf, 'Codice fiscale' %>
-          <%= f.text_field :cf %>
+          <%= f.text_field :cf, class: 'span12' %>
           <%= f.errors :cf, class: 'help-inline' %>
         </span>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :payment_type, 'Tipo di pagamento' %>
-      <%= f.text_field :payment_type, class: 'input-xxlarge' %>
-      <%= f.errors :payment_type, class: 'help-inline' %>
+      <div class="row-fluid">
+        <span class="span12">
+          <%= f.label :payment_type, 'Tipo di pagamento' %>
+          <%= f.text_field :payment_type, class: 'span12' %>
+          <%= f.errors :payment_type, class: 'help-inline' %>
+        </span>
+      </div>
     </div>
     <div class="control-group">
-      <%= f.label :bank, 'Banca' %>
-      <%= f.text_area :bank, rows: 2, class: 'input-xxlarge' %>
-      <%= f.errors :bank, class: 'help-inline' %>
+      <div class="row-fluid">
+        <span class="span12">
+          <%= f.label :bank, 'Banca' %>
+          <%= f.text_area :bank, class: 'span12 note' %>
+          <%= f.errors :bank, class: 'help-inline' %>
+        </span>
+      </div>
     </div>
     <div class="control-group">
-      <div class="row">
-        <span class="span1">
+      <div class="row-fluid">
+        <span class="span2">
           <%= f.label :abi, 'ABI' %>
-          <%= f.text_field :abi, class: 'input-mini' %>
+          <%= f.text_field :abi, class: 'span12' %>
           <%= f.errors :abi, class: 'help-inline' %>
         </span>
-        <span class="span1">
+        <span class="span2">
           <%= f.label :cab, 'CAB' %>
-          <%= f.text_field :cab, class: 'input-mini' %>
+          <%= f.text_field :cab, class: 'span12' %>
           <%= f.errors :cab, class: 'help-inline' %>
         </span>
-        <span class="span2 offset2 currency">
+        <span class="span4 offset4 currency">
           <%= f.label :hourly_cost, 'Costo orario' %>
           <span class="input-append">
-            <%= f.currency_field :hourly_cost, class: 'input-small' %>
+            <%= f.currency_field :hourly_cost, class: 'span10' %>
             <span class="add-on">&euro;</span>
           </span>
           <%= f.errors :hourly_cost, class: 'help-inline' %>
@@ -61,9 +77,13 @@
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :note %>
-      <%= f.text_area :note, rows: 5, class: 'input-xxlarge' %>
-      <%= f.errors :note, class: 'help-inline' %>
+      <div class="row-fluid">
+        <span class="span12">
+          <%= f.label :note %>
+          <%= f.text_area :note, class: 'span12 note' %>
+          <%= f.errors :note, class: 'help-inline' %>
+        </span>
+      </div>
     </div>
   </div>
   <div class="modal-footer">

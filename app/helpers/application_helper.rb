@@ -1,11 +1,6 @@
 module ApplicationHelper
-  class MyFormBuilder < ActionView::Helpers::FormBuilder
-    def field(method, options = {}, &block)
-      options[:class] = [ options[:class],  'error' ].join(' ') unless object.errors[method].blank?
-      @template.content_tag(:div, options) do
-        block.call
-      end
-    end
+  #class MyFormBuilder < ActionView::Helpers::FormBuilder
+  class MyFormBuilder < NestedForm::Builder
 
     def errors(method, options = {})
       unless object.errors[method].blank?

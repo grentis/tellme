@@ -62,10 +62,6 @@ $('.currency input').on('keydown', function(e){
     var allowNegative = true;
     var $this = $(this);
 
-    console.log(str);
-    console.log(code)
-    console.log(getPos(this))
-
     // check Backspace, Tab, Enter, Delete, and left/right arrows
     if (code ==  8) functional = true;
     if (code ==  9) functional = true;
@@ -135,7 +131,7 @@ $('.currency input').on('keydown', function(e){
   var str = $(this).val();
 
   if (str.length == 0)
-    str = "0"
+    return
 
   var p = parseFloat(str.replace(/,/,".")).toFixed(2)
 

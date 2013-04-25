@@ -10,7 +10,7 @@ module ActionView
         options[:builder] = ApplicationHelper::MyFormBuilder
         fields_for_without_errors(record_name, record_object, options, &block)
       end
- 
+
       alias_method_chain :form_for, :errors
       alias_method_chain :fields_for, :errors
 

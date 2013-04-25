@@ -1,5 +1,5 @@
 class Payment < ActiveRecord::Base
-  attr_accessible :v_date, :paid, :value
+  attr_accessible :v_date, :paid, :value, :note, :_destroy
 
   belongs_to :invoice
   has_one :client, through: :invoice
@@ -13,7 +13,7 @@ class Payment < ActiveRecord::Base
   validates :month, inclusion: { in: (1..12), message: (I18n.t 'errors.messages.invalid') }, unless: Proc.new { |a| !a.month.blank? }
   validates :value, numericality: true
 
-  attr_accessor :v_date
+  attr_accessor :v_date, :_destroy
 
   def expired?
     now = Time.now
@@ -21,7 +21,7 @@ class Payment < ActiveRecord::Base
   end
 
   def should_be_deleted?
-    self.year.blank? && self.month.blank? && self.value.blank?
+    self.year.blank? && self.month.blank? && self.value.blank? && self.note.blank?
   end
 
   def value=(value)

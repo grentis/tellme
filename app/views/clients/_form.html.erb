@@ -1,7 +1,15 @@
 <%= form_for @client, remote: true, html: { class: 'form-cliente' } do |f| %>
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3><%= ["edit", "update"].include?( params[:action] ) ? 'Modifica cliente' : 'Nuovo cliente' %></h3>
+    <div class="row-fluid">
+      <span class="span4">
+        <h3><%= ["edit", "update"].include?( params[:action] ) ? 'Modifica cliente' : 'Nuovo cliente' %></h3>
+      </span>
+      <span class="span6 offset1">
+        <%= f.text_area :note, class: 'span12 note' %>
+        <%= f.errors :note, class: 'help-inline' %>
+      </span>
+    </div>
   </div>
   <div class="modal-body">
     <div class="control-group">
@@ -76,7 +84,7 @@
         </span>
       </div>
     </div>
-    <div class="control-group">
+    <!--div class="control-group">
       <div class="row-fluid">
         <span class="span12">
           <%= f.label :note %>
@@ -84,7 +92,7 @@
           <%= f.errors :note, class: 'help-inline' %>
         </span>
       </div>
-    </div>
+    </div-->
   </div>
   <div class="modal-footer">
     <%= link_to "Annulla",  cancel_clients_path, class: 'btn', remote: true %>

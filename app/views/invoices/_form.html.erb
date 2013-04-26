@@ -1,7 +1,15 @@
 <%= nested_form_for @invoice, remote: true, html: { class: 'form-invoice' } do |f| %>
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3><%= ["edit", "update"].include?( params[:action] ) ? 'Modifica fattura' : 'Nuova fattura' %></h3>
+    <div class="row-fluid">
+      <span class="span3">
+        <h3><%= ["edit", "update"].include?( params[:action] ) ? 'Modifica fattura' : 'Nuova fattura' %></h3>
+      </span>
+      <span class="span7 offset1">
+        <%= f.text_area :note, class: 'span12 note' %>
+        <%= f.errors :note, class: 'help-inline' %>
+      </span>
+    </div>
   </div>
   <div class="modal-body">
     <div class="control-group">
@@ -43,11 +51,11 @@
           </div>
           <%= f.errors :amount, class: 'help-inline' %>
         </span>
-        <span class="span6 offset4">
+        <!--span class="span6 offset4">
           <%= f.label :note, 'Note fattura' %>
           <%= f.text_area :note, class: 'span12 note' %>
           <%= f.errors :note, class: 'help-inline' %>
-        </span>
+        </span-->
       </div>
     </div>
     <div class="control-group">

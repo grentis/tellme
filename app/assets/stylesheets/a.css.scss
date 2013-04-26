@@ -1,7 +1,7 @@
 @import "compass_twitter_bootstrap";
 
 .form-cliente {
-  
+
   .iva, .cf {
     input {
       text-transform: uppercase;
@@ -27,9 +27,17 @@
 
 
 textarea.note {
-  height:20px;
+  height:30px;
+  background:image-url('note.png') no-repeat 5px 5px;
+  padding-left: 25px;
 }
 
 .marked_for_destruction {
   display: none;
+}
+
+input.currency {
+  background:image-url('euro.png') no-repeat 99% 6px;
+  text-align:right;
+  padding-right: 25px;
 }

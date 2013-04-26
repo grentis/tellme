@@ -51,13 +51,13 @@ $(function() {
     });
   }).on('blur.tellme', 'textarea.note', function(e){
     var $this = $(this);
-    var eh = $this.data('collapsed-height') || '20px';
+    var eh = $this.data('collapsed-height') || '30px';
     $this.stop().animate({
       height: eh
     });
   }).on('nested:fieldAdded', function(event){
     // this field was just inserted into your form
-    var field = event.field; 
+    var field = event.field;
     // it's a jQuery object already! Now you can find date input
     var dateField = field.find('.month-year');
     // and activate datepicker on it

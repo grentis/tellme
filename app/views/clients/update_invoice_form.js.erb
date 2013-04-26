@@ -1,0 +1,8 @@
+var $invoice_form = $('#invoice-form');
+var $client_form = $('#client-form');
+if ($invoice_form.length > 0) {
+  $('#client-form').modal('hide');
+  $('#invoice_client_id', $invoice_form).append("<%= escape_javascript(render partial: 'option') %>").val('<%= @client.id %>').trigger('change');
+}
+
+

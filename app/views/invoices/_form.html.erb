@@ -20,7 +20,7 @@
         <%= f.errors :client_id, class: 'help-inline' %>
         </span>
         <span class="span1">
-          <%= link_to 'Add', new_client_path, remote: true %>
+          <%= link_to 'Add', new_client_path(fi: 1), remote: true %>
         </span>
       </div>
     </div>
@@ -33,10 +33,7 @@
         </span>
         <span class="span2">
           <%= f.label :date %>
-          <div class="input-append date">
-            <%= f.text_field :date, class: 'input-small', value: ( @invoice.date.strftime("%d.%m.%Y") unless @invoice.date.blank? ) %>
-            <span class="remove add-on"><i class="icon-remove"></i></span>
-          </div>
+          <%= f.text_field :date, class: 'input-small date', value: ( @invoice.date.strftime("%d.%m.%Y") unless @invoice.date.blank? ) %>
           <%= f.errors :date, class: 'help-inline' %>
         </span>
       </div>
@@ -74,7 +71,7 @@
             <%= builder.errors :value %>
           </span>
           <span class="span2">
-            <%= builder.text_field :v_date, class: 'input-small month-year' %>
+            <%= builder.text_field :v_date, class: 'input-small date', data: { 'date-type' => :month } %>
             <%= builder.errors :v_date %>
           </span>
           <span class="span6 offset2">

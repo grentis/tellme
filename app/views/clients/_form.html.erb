@@ -1,4 +1,5 @@
 <%= form_for @client, remote: true, html: { class: 'form-cliente' } do |f| %>
+  <%= hidden_field_tag :from_invoice, @from_invoice %>
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <div class="row-fluid">

@@ -12,30 +12,75 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery_nested_form
 //= require bootstrap
 //= require bootstrap-modal
 //= require bootstrap-modalmanager
 //= require bootstrap-datepicker
 //= require locales/bootstrap-datepicker.it
 //= require select2/select2
-//= require jquery_nested_form
+
+
+(function($) {
+  window.TellMe = function() {
+    this.init_everything($(document));
+    //this.addFields = $.proxy(this.expandField, this);
+    //this.removeFields = $.proxy(this.collapseField, this);
+  };
+
+  TellMe.prototype = {
+    init_everything: function(context) {
+      this.init_datepicker(context);
+    },
+    init_datepicker: function(context) {
+      var opts = {
+        autoclose: true,
+        language: 'it'
+      }
+      $('input.date', context).each(function(){
+        var $this = $(this);
+        var type = $this.data('date-type') || 'day';
+        switch(type){
+          case 'day': $this.datepicker(
+                          $.extend(opts, {
+                            format: 'dd.mm.yyyy'
+                          })
+                       ); return;
+          case 'month': $this.datepicker(
+                          $.extend(opts, {
+                            format: 'MM yyyy',
+                            minViewMode: 1,
+                            startView: 1
+                          })
+                        ); return;
+        }
+      });
+    },
+    expandField: function(e) {
+      var $this = $(this);
+      var eh = $this.data('expanded-height') || '60px';
+      $this.stop().animate({
+        height: eh
+      });
+    },
+    collapseField: function(e) {
+      var $this = $(this);
+      var eh = $this.data('collapsed-height') || '30px';
+      $this.stop().animate({
+        height: eh
+      });
+    }
+  };
+
+  window.tellMe = new TellMe();
+  $(document)
+    .delegate('textarea.note', 'focus', tellMe.expandField)
+    .delegate('textarea.note', 'blur', tellMe.collapseField);
+})(jQuery);
 
 
 
 $(function() {
-  $('#invoice_date').datepicker({
-    format: 'dd.mm.yyyy',
-    autoclose: true,
-    language: 'it'
-  });
-
-  $('input.month-year').datepicker({
-    format: 'MM yyyy',
-    autoclose: true,
-    language: 'it',
-    minViewMode: 1,
-    startView: 1
-  });
 
   $('.remove').on('click', function(e){
     $(this).prev().val(null);
@@ -43,7 +88,7 @@ $(function() {
     return false;
   });
 
-  $(document).on('focus.tellme', 'textarea.note', function(e){
+  /*$(document).on('focus.tellme', 'textarea.note', function(e){
     var $this = $(this);
     var eh = $this.data('expanded-height') || '60px';
     $this.stop().animate({
@@ -68,6 +113,6 @@ $(function() {
       minViewMode: 1,
       startView: 1
     });
-  });
+  });*/
 
 });

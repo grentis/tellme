@@ -1,6 +1,7 @@
 class ClientsController < ApplicationController
   def new
     @client = Client.new
+    @from_invoice = params[:fi] || 0
     render action: :edit
   end
 
@@ -22,8 +23,13 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new(params[:client])
+    @from_invoice = params[:from_invoice]
     if @client.save
-      redirect_to dashboard_index_path
+      if @from_invoice == 1.to_s
+        render 'update_invoice_form'
+      else
+        redirect_to dashboard_index_path
+      end
     else
       render action: :edit
     end

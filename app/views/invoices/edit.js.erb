@@ -1,14 +1,11 @@
 var $client_form = $('#invoice-form');
 if ($client_form.length <= 0) {
-  $client_form = $('<div class="modal container" id="invoice-form"></div>').appendTo($('body'))  
+  $client_form = $('<div class="modal container" id="invoice-form"></div>').appendTo($('body'))
 }
 $client_form.html("<%= escape_javascript(render partial: 'form') %>").on('hidden', function(e) { $(this).remove(); } ).modal();
 
-$('#invoice_date').datepicker({
-  format: 'dd.mm.yyyy',
-  autoclose: true,
-  language: 'it'
-});
+
+window.tellMe.init_everything($client_form);
 
 $('#invoice_client_id').select2({
   formatResult: function(state) {
@@ -30,13 +27,6 @@ $('#invoice_client_id').select2({
   escapeMarkup: function(m) { return m; }
 });
 
-$('input.month-year').datepicker({
-  format: 'MM yyyy',
-  autoclose: true,
-  language: 'it',
-  minViewMode: 1,
-  startView: 1
-});
 
 $('.remove').on('click', function(e){
   $(this).prev().val(null);
@@ -107,7 +97,7 @@ $('.currency input').on('keydown', function(e){
     if (parse){
 
       $this.data('parse', true)
-      
+
     }
 }).on("keyup", function(e){
   if ($(this).data("parse")){
@@ -121,11 +111,11 @@ $('.currency input').on('keydown', function(e){
     var p = parseFloat(str.replace(/,/,".")).toFixed(2)
     if (isNaN(p))
       p = ""
-    $(this).val(p.replace(/\./,","))          
+    $(this).val(p.replace(/\./,","))
 
     $(this).data("parse", null)
   }
-  
+
 }).on('focusout', function(e){
   var $this = $(this);
   var str = $(this).val();
@@ -143,5 +133,5 @@ $('.currency input').on('keydown', function(e){
   console.log(p)
 
   $this.val(p.replace(/\./,","))
-  
+
 });

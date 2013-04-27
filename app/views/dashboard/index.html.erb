@@ -4,8 +4,10 @@ Qui visualizzo quelli scaduti
     <div>
       <span class="label label-important" style="min-width:100px"><%= p.v_date %></span>
       <span class="has-popup" data-placement="bottom" data-content='<div class="note"><%= p.client.note %></div>' data-title='<div class="actions"><%= link_to "Modifica", edit_client_path(p.client), remote: true %></div>'><%= p.client.name %></span>
-      <span><%= p.invoice.number %></span>
-      <span><%= p.invoice.date %></span>
+      <span class="has-popup" data-placement="bottom" data-content='<div class="note"><%= p.invoice.note %></div><div class=""><%= p.invoice.amount %></div><ul><% p.invoice.payments.each do |m| %><li><%= m.v_date %> - <%= m.value %></li><% end %></ul>'>
+        <span><%= p.invoice.number %></span>
+        <span><%= p.invoice.date %></span>
+      </span>
       <span><%= p.value %></span>
     </div>
   <% end %>

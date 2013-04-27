@@ -5,7 +5,7 @@ class Payment < ActiveRecord::Base
   has_one :client, through: :invoice
 
   scope :paid, where( paid: true )
-  scope :expired, conditions: ["paid = :paid and (year < :year or (year = :year and month < :month))", { paid: false, year: Time.now.year, month: Time.now.month }]
+  scope :expired, conditions: ["paid = :paid and (year < :year or (year = :year and month < :month))", { paid: false, year: Time.now.year, month: Time.now.month }], order: [:year, :month]
   scope :by_index, Proc.new { |index|
     d = Helper::get_date_by_index index
     where("year = :year and month = :month", { year: d.year, month: d.month }).order(:id) unless index.nil?

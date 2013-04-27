@@ -1,0 +1,30 @@
+<ul>
+  <% total = 0 %>
+  <% payments.each do |payment| %>
+    <% total = total + payment.value %>
+    <li class="payment media <%= payment.paid? ? "paid" : payment.expired? ? "expired" : "to-be-paid" %>" data-client="<%= payment.client.id %>">
+      <%= label_tag payment, 'timeline' %>
+      <div class="media-body">
+        <h4 class="media-heading">
+          <span class="value"><%= write_currency payment.value %></span>
+          <span class="client has-popup" title="" data-content="content<br/>ciao<br/><br/><br/>ciaodsoaodas" data-title="A Title"> - <%= payment.client.name %></span>
+        </h4>
+        <span class="info">
+          <span class="invoice">
+            rata <%= payment.index %> di <%= payment.invoice.num_payments %> per la fattura <%= payment.invoice.number %> del <%= payment.invoice.date.strftime('%d/%b/%Y') %>
+          </span>
+          <span class="note"><%= payment.note %></span>
+        </span>
+      </div>
+      <ul class="actions">
+        <li><%= #link_to content_tag(:i, '', class: payment.paid? ? 'icon-paid' : 'icon-unpaid'), mark_payment_path(payment), method: :put, remote: true, class: 'check', title: payment.paid? ? 'segna come non pagato' : 'segna come pagato' 
+        %></li>
+        <li><%= #link_to content_tag(:i, '', class: 'icon-pencil'), edit_payment_path(payment), remote: true, title: 'modifica' 
+        %></li>
+        <li><%= #link_to content_tag(:i, '', class: 'icon-trash'), payment_path(payment), confirm: 'Sei sicuro di voler cancellare questa rata?', method: :delete, remote: true, title: 'cancella' 
+        %></li>
+      </ul>
+    </li>
+  <% end %>
+</ul>
+<div class="total"><span class="lab">totale:</span><span class="value"><%= write_currency total %></span></div>

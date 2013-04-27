@@ -1,19 +1,48 @@
 
 Qui visualizzo quelli scaduti
   <% @expired.each do |p| %>
-    <div>
+    <!--div>
       <span class="label label-important" style="min-width:100px"><%= p.v_date %></span>
       <span><%= p.client.name %></span>
       <span><%= p.invoice.number %></span>
       <span><%= p.invoice.date %></span>
       <span><%= p.value %></span>
-    </div>
+    </div-->
   <% end %>
 
 
 
+
+<%= link_to 'Nuovo cliente', new_client_path, remote: true %>
+
+<br/>
+
+<%= link_to 'Nuova fattura', new_invoice_path, remote: true %>
+
+
+
+<div class="row-fluid" id="timeline">
+  <div class="span12">
+    <% (-1..4).each do |index| %>
+      <div class="row-fluid t-month" data-index="<%= index %>">
+        <a href="#" class="new_payment"><i class="icon-plus"></i> Aggiungi rata</a>
+        <div class="span2 offset1 date">
+          <% date = Helper::get_date_by_index index %>
+          <span class="year"><%= date.year %></span>
+          <span class="month"><%= month_as_string date.month %></span>
+        </div>
+        <div class="span6 payments">
+          <%= render "payments/payments", { payments: Payment.by_index(index) }%>
+        </div>
+        <i></i>
+      </div>  
+    <% end %>
+  </div>
+</div>
+
+
 Elenco clienti
-<table class="table">
+<!--table class="table">
   <% @clients.each do |c| %>
     <tr>
       <td><%= c.name %></td>
@@ -36,10 +65,4 @@ Elenco clienti
       </td>
     </tr>
   <% end %>
-</table>
-
-<%= link_to 'Nuovo cliente', new_client_path, remote: true %>
-
-<br/>
-
-<%= link_to 'Nuova fattura', new_invoice_path, remote: true %>
+</table-->

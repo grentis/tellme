@@ -6,7 +6,7 @@
         <h3><%= ["edit", "update"].include?( params[:action] ) ? 'Modifica fattura' : 'Nuova fattura' %></h3>
       </span>
       <span class="span7 offset1">
-        <%= f.text_area :note, class: 'span12 note' %>
+        <%= f.text_area :note, class: 'span12 note expand' %>
         <%= f.errors :note, class: 'help-inline' %>
       </span>
     </div>
@@ -15,9 +15,9 @@
     <div class="control-group">
       <div class="row-fluid">
         <span class="span11">
-        <%= f.label :client_id %>
-        <%= f.select :client_id, options_for_select(Client.all.map{ |c| [ c.name, c.id, { 'data-address' => c.address, 'data-note' => c.note } ] }, @invoice.client_id) %>
-        <%= f.errors :client_id, class: 'help-inline' %>
+          <%= f.label :client_id %>
+          <%= f.select :client_id, options_for_select(Client.all.map{ |c| [ c.name, c.id, { 'data-address' => c.address, 'data-note' => c.note } ] }, @invoice.client_id) %>
+          <%= f.errors :client_id, class: 'help-inline' %>
         </span>
         <span class="span1">
           <%= link_to 'Add', new_client_path(fi: 1), remote: true %>
@@ -33,7 +33,7 @@
         </span>
         <span class="span2">
           <%= f.label :date %>
-          <%= f.text_field :date, class: 'input-small date', value: ( @invoice.date.strftime("%d.%m.%Y") unless @invoice.date.blank? ) %>
+          <%= f.text_field :date, class: 'span12 date', value: ( @invoice.date.strftime("%d.%m.%Y") unless @invoice.date.blank? ) %>
           <%= f.errors :date, class: 'help-inline' %>
         </span>
       </div>
@@ -42,17 +42,9 @@
       <div class="row-fluid">
         <span class="span2">
           <%= f.label :amount %>
-          <div class="input-append currency">
-            <%= f.currency_field :amount, class: 'span12' %>
-            <span class="add-on">&euro;</span>
-          </div>
+          <%= f.currency_field :amount, class: 'span12 currency' %>
           <%= f.errors :amount, class: 'help-inline' %>
         </span>
-        <!--span class="span6 offset4">
-          <%= f.label :note, 'Note fattura' %>
-          <%= f.text_area :note, class: 'span12 note' %>
-          <%= f.errors :note, class: 'help-inline' %>
-        </span-->
       </div>
     </div>
     <div class="control-group">
@@ -62,23 +54,24 @@
         <span class="span6 offset2">Nota pagamento</span>
       </div>
       <%= f.fields_for :payments do |builder| %>
-        <div class="row-fluid">
+        <div class="row-fluid single-payment">
           <span class="span2">
-            <span class="input-append currency">
-              <%= builder.currency_field :value, class: 'input-small currency' %>
-              <span class="add-on">&euro;</span>
-            </span>
+            <%= builder.currency_field :value, class: 'span12 currency' %>
             <%= builder.errors :value %>
           </span>
           <span class="span2">
-            <%= builder.text_field :v_date, class: 'input-small date', data: { 'date-type' => :month } %>
+            <%= builder.text_field :v_date, class: 'span12 date', data: { 'date-type' => :month } %>
             <%= builder.errors :v_date %>
           </span>
-          <span class="span6 offset2">
-            <%= builder.text_area :note, class: 'note span12' %>
+          <span class="span6">
+            <%= builder.text_area :note, class: 'span12 note expand' %>
             <%= builder.errors :note %>
           </span>
-          <%= builder.link_to_remove "Elimina rata" %>
+          <span class="span2">
+            <%= builder.link_to_remove(class: 'btn btn-mini') do %>
+              <i class="icon-trash"></i> Elimina rata
+            <% end %>
+          </span>
         </div>
       <% end %>
       <%= f.link_to_add "Aggiungi rata", :payments %>

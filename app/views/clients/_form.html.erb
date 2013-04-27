@@ -7,7 +7,7 @@
         <h3><%= ["edit", "update"].include?( params[:action] ) ? 'Modifica cliente' : 'Nuovo cliente' %></h3>
       </span>
       <span class="span6 offset1">
-        <%= f.text_area :note, class: 'span12 note' %>
+        <%= f.text_area :note, class: 'span12 note expand' %>
         <%= f.errors :note, class: 'help-inline' %>
       </span>
     </div>
@@ -26,7 +26,7 @@
       <div class="row-fluid">
         <span class="span12">
           <%= f.label :address, 'Indirizzo' %>
-          <%= f.text_area :address, class: 'span12 note' %>
+          <%= f.text_area :address, class: 'span12 expand' %>
           <%= f.errors :address, class: 'help-inline' %>
         </span>
       </div>
@@ -58,7 +58,7 @@
       <div class="row-fluid">
         <span class="span12">
           <%= f.label :bank, 'Banca' %>
-          <%= f.text_area :bank, class: 'span12 note' %>
+          <%= f.text_area :bank, class: 'span12 expand' %>
           <%= f.errors :bank, class: 'help-inline' %>
         </span>
       </div>
@@ -77,23 +77,11 @@
         </span>
         <span class="span4 offset4 currency">
           <%= f.label :hourly_cost, 'Costo orario' %>
-          <span class="input-append">
-            <%= f.currency_field :hourly_cost, class: 'span10' %>
-            <span class="add-on">&euro;</span>
-          </span>
+          <%= f.currency_field :hourly_cost, class: 'span12 currency' %>
           <%= f.errors :hourly_cost, class: 'help-inline' %>
         </span>
       </div>
     </div>
-    <!--div class="control-group">
-      <div class="row-fluid">
-        <span class="span12">
-          <%= f.label :note %>
-          <%= f.text_area :note, class: 'span12 note' %>
-          <%= f.errors :note, class: 'help-inline' %>
-        </span>
-      </div>
-    </div-->
   </div>
   <div class="modal-footer">
     <%= link_to "Annulla",  cancel_clients_path, class: 'btn', remote: true %>

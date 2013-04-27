@@ -1,11 +1,11 @@
-var $client_form = $('#invoice-form');
-if ($client_form.length <= 0) {
-  $client_form = $('<div class="modal container" id="invoice-form"></div>').appendTo($('body'))
+var $invoice_form = $('#invoice-form');
+if ($invoice_form.length <= 0) {
+  $invoice_form = $('<div class="modal container" id="invoice-form"></div>').appendTo($('body'))
 }
-$client_form.html("<%= escape_javascript(render partial: 'form') %>").on('hidden', function(e) { $(this).remove(); } ).modal();
+$invoice_form.html("<%= escape_javascript(render partial: 'form') %>").on('hidden', function(e) { $(this).remove(); } ).modal();
 
 
-window.tellMe.init_everything($client_form);
+window.tellMe.init_everything($invoice_form);
 
 $('#invoice_client_id').select2({
   formatResult: function(state) {
@@ -26,7 +26,3 @@ $('#invoice_client_id').select2({
   },
   escapeMarkup: function(m) { return m; }
 });
-
-
-
-

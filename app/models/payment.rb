@@ -6,6 +6,10 @@ class Payment < ActiveRecord::Base
 
   scope :paid, where( paid: true )
   scope :expired, conditions: ["paid = :paid and (year < :year or (year = :year and month < :month))", { paid: false, year: Time.now.year, month: Time.now.month }]
+  scope :by_index, Proc.new { |index|
+    d = Helper::get_date_by_index index
+    where("year = :year and month = :month", { year: d.year, month: d.month }).order(:id) unless index.nil?
+  }
 
   validates :year, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 2000, less_than_or_equal_to:2050 }
   validates :v_date, presence: true
@@ -46,6 +50,15 @@ class Payment < ActiveRecord::Base
       self.month = nil
       self.year = nil
     end
+  end
+
+  def index
+    pos = 0
+    self.invoice.payments.each do |payment|
+      pos = pos + 1
+      return pos if payment.id == self.id
+    end
+    return nil
   end
 
 end

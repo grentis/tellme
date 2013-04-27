@@ -17,13 +17,24 @@
 //= require bootstrap-modal
 //= require bootstrap-modalmanager
 //= require bootstrap-datepicker
+//= require bootstrap-clickover
 //= require locales/bootstrap-datepicker.it
 //= require select2/select2
+//= require jquery.scrollTo-min
+//= require jquery.mousewheel
+//= require dashboard
+
+
 
 
 (function($) {
+
   window.TellMe = function() {
-    this.init_everything($(document));
+    var that = this;
+    setTimeout(function(){
+      that.init_everything($(document));
+    }, 100);
+    
 
     this.currencyFieldKeyDown = $.proxy(this.currencyFieldKeyDown, this);
     this.currencyFieldKeyUp = $.proxy(this.currencyFieldKeyUp, this);
@@ -33,6 +44,13 @@
   TellMe.prototype = {
     init_everything: function(context) {
       this.init_datepicker(context);
+      this.init_clickover(context);
+    },
+    init_clickover: function(context) {
+      console.log(context)
+      $('.has-popup', context).clickover({
+        html: true
+      });
     },
     init_datepicker: function(context) {
       var opts = {
@@ -44,10 +62,10 @@
         var type = $this.data('date-type') || 'day';
         switch(type){
           case 'day': $this.datepicker(
-                          $.extend(opts, {
-                            format: 'dd.mm.yyyy'
-                          })
-                       ); return;
+                        $.extend(opts, {
+                          format: 'dd.mm.yyyy'
+                        })
+                      ); return;
           case 'month': $this.datepicker(
                           $.extend(opts, {
                             format: 'MM yyyy',
@@ -85,11 +103,10 @@
         if (o.createTextRange) {
           var r = document.selection.createRange().duplicate();
           r.moveEnd('character', o.value.length);
-          if (r.text === '') { return o.value.length; }
+          if (r.text === '') return o.value.length;
           return o.value.lastIndexOf(r.text);
-        } else {
+        } else
           return o.selectionStart;
-        }
       };
       var $$this = e.currentTarget;
       var $this = $($$this);
@@ -143,9 +160,12 @@
 
   window.tellMe = new TellMe();
   $(document)
-    .delegate('textarea.note', 'focus', tellMe.expandField)
-    .delegate('textarea.note', 'blur', tellMe.collapseField)
+    .delegate('textarea.expand', 'focus', tellMe.expandField)
+    .delegate('textarea.expand', 'blur', tellMe.collapseField)
     .delegate('input.currency', 'keydown', tellMe.currencyFieldKeyDown)
     .delegate('input.currency', 'keyup', tellMe.currencyFieldKeyUp)
-    .delegate('input.currency', 'focusout', tellMe.currencyFieldFocusOut);
+    .delegate('input.currency', 'focusout', tellMe.currencyFieldFocusOut)
+    .on('nested:fieldAdded', function(event){
+      tellMe.init_everything(event.field);
+    });
 })(jQuery);

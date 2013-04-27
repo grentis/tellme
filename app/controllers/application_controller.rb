@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
 
   def redirect_to(options = {}, response_status = {})
     if request.xhr?
-      render js: "window.location.pathname='#{options}'"
+      puts options
+      render js: "window.location.href='#{options}'"
     else
       super(options, response_status)
     end

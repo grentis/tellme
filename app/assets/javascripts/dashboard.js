@@ -145,10 +145,6 @@ $(function() {
     var $this = $(this);
     $('.select .value', $this.closest('#change_month')).html($this.html()).attr('data-index', $this.attr('data-index'));
     event.preventDefault();
-  }).on('click.ml', '.new_payment', function(event) {
-    event.preventDefault();
-    $('<div class="modal" id="payment_modal"></div>').load('months/' + $(this).closest('.t-month').attr('data-index') + '/payments/new').appendTo($('body')).on('hidden', function(e) { $(this).remove(); } ).modal();
-    return false;
   }).on('click.ml', '#clients .clients > li', function(event) {
     var $this = $(this);
     $('.clients > li', $this.closest('#clients')).removeClass('active');

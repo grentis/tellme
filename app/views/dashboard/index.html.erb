@@ -1,13 +1,13 @@
 
 Qui visualizzo quelli scaduti
   <% @expired.each do |p| %>
-    <!--div>
+    <div>
       <span class="label label-important" style="min-width:100px"><%= p.v_date %></span>
-      <span><%= p.client.name %></span>
+      <span class="has-popup" data-placement="bottom" data-content='<div class="note"><%= p.client.note %></div>' data-title='<div class="actions"><%= link_to "Modifica", edit_client_path(p.client), remote: true %></div>'><%= p.client.name %></span>
       <span><%= p.invoice.number %></span>
       <span><%= p.invoice.date %></span>
       <span><%= p.value %></span>
-    </div-->
+    </div>
   <% end %>
 
 
@@ -23,9 +23,8 @@ Qui visualizzo quelli scaduti
 
 <div class="row-fluid" id="timeline">
   <div class="span12">
-    <% (-1..4).each do |index| %>
+    <% (-3..8).each do |index| %>
       <div class="row-fluid t-month" data-index="<%= index %>">
-        <a href="#" class="new_payment"><i class="icon-plus"></i> Aggiungi rata</a>
         <div class="span2 offset1 date">
           <% date = Helper::get_date_by_index index %>
           <span class="year"><%= date.year %></span>

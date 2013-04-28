@@ -4,6 +4,7 @@
 
 html, body {
   height: 100%;
+  font-size: 13px;
 }
 
 .form-cliente {
@@ -56,8 +57,107 @@ input {
 }
 
 
+.payment.media {
+  overflow: visible;
+  list-style-type:none;
+  margin:0;
+  padding:3px 0;
+  border-bottom: 1px solid #CCC;
+  position:relative;
 
+  .label {
+    min-width: 100px;
+    text-align:center;
+    margin:3px 0 0 5px;
+  }
 
+  h4 {
+    font-size: 15px;
+    margin-bottom: 2px;
+
+    .client {
+      cursor:pointer;
+    }
+  }
+
+  .value {
+    color: #b94a48;
+    min-width: 100px;
+    margin-right: 10px;
+    display: inline-block;
+    text-align: right;
+  }
+
+  .info {
+    margin-left: 113px;
+    cursor:pointer;
+  }
+
+  .actions {
+    position:absolute;
+    right:5px;
+    top: 50%;
+    margin:-10px 0 0 0;
+    padding:0;
+    height:20px;
+    width:150px;
+    display: none;
+    list-style-type: none;
+    text-align: right;
+
+    li {
+      display: inline-block;
+      margin-left:5px;
+    }
+  }
+
+  &:hover {
+    background-color:#F8FFE3;
+
+    .actions {
+      display: block;
+    }
+  }
+}
+
+.payment.media .popover {
+  cursor:default;
+
+  .popover-title {
+    position: relative;
+    line-height: 18px;
+    font-size: 13px;
+  }
+
+  .popover-content {
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 18px;
+  }
+
+  .actions {
+    display: block;
+  }
+}
+
+ul.list-payments {
+  border-top:1px dotted #CCC;
+  margin: 3px 0 0 0;
+  padding: 3px 0 0 18px;
+  list-style-type: none;
+  background:image-url('glyphicons_114_list.png') no-repeat 0 6px;
+}
+
+div.value {
+  background:image-url('glyphicons_226_euro.png') no-repeat 0 0;
+  padding-left:18px;
+  margin-bottom:3px;
+}
+div.note {
+  background:image-url('comments.png') no-repeat 0 3px;
+  padding-left: 18px;
+  margin-bottom:3px;
+}
 
 
 #timeline {
@@ -68,37 +168,26 @@ input {
 
   .t-month {
     position:relative;
+    border-bottom: 1px solid #CCC;
     @include opacity(0.5);
 
     &.active {
       @include opacity(1);
-    }
 
-    & > i {
-      position:absolute;
-      left:80px;
-      bottom:0;
-      border-bottom:1px solid #EEE;
-      width:600px;
-    }
-
-    .new_payment {
-      position:absolute;
-      bottom:20px;
-      right:20px;
-      display: none;
-    }
-
-    &:hover {
-      .new_payment {
-        display: block;
+      .date {
+        .year {
+          color: darken(#EEE, 20%);
+        }
+        .month {
+         color: darken(#CCC, 20%); 
+        }
       }
     }
 
     .total {
       position:absolute;
       bottom:20px;
-      right:482px;
+      right:720px;
 
       .value {
         padding-left:5px;
@@ -131,73 +220,22 @@ input {
     }
   }
 
-  .payments > ul {
-    min-height:80px;
-    margin:0;
-    padding:5px 5px 60px 5px;
-    list-style-type: none;
-    border-left:1px solid #EEE;
+  .payments {
+    border-left: 1px solid #CCC;
+    min-height: 150px;
 
-    .paid {
-      @include opacity(0.2);
-    }
-    .to-be-paid {
-      .label {
-        visibility: hidden;
-      }
-    }
-
-    .media {
-      border-top:1px solid #EEE;
-      padding:15px 0;
-      margin-top:0;
-      position:relative;
-
-      &:first-child {
-        border:0;
-      }
-
-      &:hover {
-        //background-color:$tableBackgroundHover;
-
-        .actions {
-          display: block;
-        }
-      }
-    }
-
-    .actions {
-      list-style-type: none;
-      margin:0;
-      padding:0;
-      position:absolute;
-      top:3px;
-      right:3px;
-      display: none;
-
-      li {
-        display: inline-block;
-      }
-
-      a.check input {
-        margin:0;
-      }
+    & > ul {
+      margin-left: 0;
     }
   }
 
-  .label {
-    width:60px;
-    text-align: center;
+  .payment.media {
+    border:0;
+    padding:15px 0;
+  }
+
+  .label-info {
+    visibility: hidden;
   }
 }
-
-.payment.media {
-  overflow: visible;
-}
-
-
-
-
-
-
 

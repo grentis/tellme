@@ -1,19 +1,11 @@
 
 Qui visualizzo quelli scaduti
-  <% @expired.each do |p| %>
-    <div>
-      <span class="label label-important" style="min-width:100px"><%= p.v_date %></span>
-      <span class="has-popup" data-placement="bottom" data-content='<div class="note"><%= p.client.note %></div>' data-title='<div class="actions"><%= link_to "Modifica", edit_client_path(p.client), remote: true %></div>'><%= p.client.name %></span>
-      <span class="has-popup" data-placement="bottom" data-content='<div class="note"><%= p.invoice.note %></div><div class=""><%= p.invoice.amount %></div><ul><% p.invoice.payments.each do |m| %><li><%= m.v_date %> - <%= m.value %></li><% end %></ul>'>
-        <span><%= p.invoice.number %></span>
-        <span><%= p.invoice.date %></span>
-      </span>
-      <span><%= p.value %></span>
-    </div>
-  <% end %>
+<%= render :partial => "payments/payment", :collection => @expired, as: :payment %>
+
+<div style="margin-bottom:50px"></div>
 
 
-
+<!--
 
 <%= link_to 'Nuovo cliente', new_client_path, remote: true %>
 
@@ -21,7 +13,7 @@ Qui visualizzo quelli scaduti
 
 <%= link_to 'Nuova fattura', new_invoice_path, remote: true %>
 
-
+-->
 
 <div class="row-fluid" id="timeline">
   <div class="span12">
@@ -32,7 +24,7 @@ Qui visualizzo quelli scaduti
           <span class="year"><%= date.year %></span>
           <span class="month"><%= month_as_string date.month %></span>
         </div>
-        <div class="span6 payments">
+        <div class="span9 payments">
           <%= render "payments/payments", { payments: Payment.by_index(index) }%>
         </div>
         <i></i>

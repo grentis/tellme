@@ -54,6 +54,12 @@ Tellme::Application.routes.draw do
         get :cancel
       end
     end
+
+    resources :payments, only: [:destroy] do
+      member do
+        put :mark
+      end
+    end
   end
 
   resources :clients, only: [:destroy ], constraints: OnlyHttpRequest.new

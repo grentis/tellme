@@ -1,12 +1,13 @@
+&nbsp;
 <ul class="actions">
   <li>
-    <%= link_to edit_client_path(client), remote: true do %>
-      <i class="icon-eye-open" title="Dettagli"></i>
+    <%= link_to edit_client_path(client), remote: true, class: 'btn btn-mini' do %>
+      <i class="icon-eye-open" title="Dettagli"></i> dettagli
     <% end %>
   </li>
   <li>
-    <%= link_to edit_client_path(client), remote: true do %>
-      <i class="icon-pencil" title="Modifica"></i>
+    <%= link_to edit_client_path(client), remote: true, class: 'btn btn-mini' do %>
+      <i class="icon-pencil" title="Modifica"></i> modifica
     <% end %>
   </li>
 </ul>

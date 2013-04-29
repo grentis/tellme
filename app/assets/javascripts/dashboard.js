@@ -83,7 +83,7 @@ Date.prototype.getFullMonth = function () {
           $('input', $cmonth).val(d.getFullYear());
           if ($active.length <= 0 || $active.attr('data-index') != $this.attr('data-index')) {
             $active.removeClass('active');
-            $this.addClass('active');  
+            $this.addClass('active');
           }
           return false;
         }
@@ -112,7 +112,8 @@ $(function() {
       }
     }
     //delta = wheelDistance(event.originalEvent);
-    move_timeline($(this).scrollTop() - (delta * 100), 10);
+    //move_timeline($(this).scrollTop() - (delta * 100), 10);
+    move_timeline($(this).scrollTop() - (delta * 50), 10);
     return false;
   });
 
@@ -126,7 +127,7 @@ $(function() {
     } else return w/120;             // IE/Safari/Chrome TODO: /3 for Chrome OS X
   };
 
-  
+
 
   $(document).on('click.ml', '#change_month button', function(event){
     var $this = $(this);
@@ -154,6 +155,6 @@ $(function() {
 
   move_timeline($('.t-month[data-index=0]'), 500);
 
-  
+
 
 });

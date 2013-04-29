@@ -15,14 +15,18 @@
   </div>
   <ul class="actions">
     <li>
-      <%= link_to mark_payment_path(payment), method: :put, remote: true do %>
+      <%= link_to mark_payment_path(payment), method: :put, remote: true, class: 'btn btn-mini' do %>
         <% if payment.paid? %>
-          <i class="icon-check" title="segna come non pagato"></i>
+          <i class="icon-check" title="segna come non pagato"></i> non pagato
         <% else %>
-          <i class="icon-random" title="segna come pagato"></i>
+          <i class="icon-random" title="segna come pagato"></i> pagato
         <% end %>
       <% end %>
     </li>
-    <li><%= link_to content_tag(:i, '', class: 'icon-trash'), payment_path(payment), confirm: 'Sei sicuro di voler cancellare questa rata?', method: :delete, remote: true, title: 'cancella' %></li>
+    <li>
+      <%= link_to payment_path(payment), confirm: 'Sei sicuro di voler cancellare questa rata?', method: :delete, remote: true, title: 'elimina rata', class: 'btn btn-mini' do %>
+        <i class="icon-trash"></i> elimina
+      <% end %>
+    </li>
   </ul>
 </li>

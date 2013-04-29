@@ -97,7 +97,7 @@ input {
     position:absolute;
     right:5px;
     top: 50%;
-    margin:-10px 0 0 0;
+    margin:-13px 0 0 0;
     padding:0;
     height:20px;
     width:150px;
@@ -107,7 +107,7 @@ input {
 
     li {
       display: inline-block;
-      margin-left:5px;
+      //margin-left:5px;
     }
   }
 
@@ -179,7 +179,7 @@ div.note {
           color: darken(#EEE, 20%);
         }
         .month {
-         color: darken(#CCC, 20%); 
+         color: darken(#CCC, 20%);
         }
       }
     }
@@ -236,6 +236,12 @@ div.note {
 
   .label-info {
     visibility: hidden;
+  }
+
+  .actions {
+    top:auto;
+    bottom:10px;
+    margin:0;
   }
 }
 

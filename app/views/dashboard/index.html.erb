@@ -1,7 +1,6 @@
-
-Qui visualizzo quelli scaduti
-<%= render :partial => "payments/payment", :collection => @expired, as: :payment %>
-
+<ul id="expired">
+  <%= render :partial => "payments/payment", :collection => @expired, as: :payment %>
+</ul>
 <div style="margin-bottom:50px"></div>
 
 

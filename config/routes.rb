@@ -49,7 +49,7 @@ Tellme::Application.routes.draw do
       resources :invoices, only: [ :new ]
     end
 
-    resources :invoices, only: [ :new, :edit, :cancel, :create, :update ] do
+    resources :invoices, only: [ :new, :show, :edit, :cancel, :create, :update ] do
       collection do
         get :cancel
       end

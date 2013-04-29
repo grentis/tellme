@@ -1,5 +1,5 @@
-<li class="payment media">
-  <% source = source || 'expired' %>
+<% source = source || 'expired' %>
+<li class="payment media" id="<%= source == "expired" ? "expired_payment_#{payment.id}" : "payment_#{payment.id}" %>">
   <%= label_tag payment, source %>
   <div class="media-body">
     <h4 class="media-heading">
@@ -17,9 +17,9 @@
     <li>
       <%= link_to mark_payment_path(payment), method: :put, remote: true, class: 'btn btn-mini' do %>
         <% if payment.paid? %>
-          <i class="icon-check" title="segna come non pagato"></i> non pagato
+          <i class="icon-unchecked" title="segna come non pagato"></i> non pagato
         <% else %>
-          <i class="icon-random" title="segna come pagato"></i> pagato
+          <i class="icon-checked" title="segna come pagato"></i> pagato
         <% end %>
       <% end %>
     </li>

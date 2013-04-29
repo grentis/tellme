@@ -1,0 +1,2 @@
+$('#expired').html('<%= escape_javascript(render :partial => "payments/payment", :collection => @expired, as: :payment) %>');
+$('#payment_<%= @payment.id %>').replaceWith('<%= escape_javascript(render partial: "payment", locals: { payment: @payment, source: "timeline" }) %>');

@@ -83,6 +83,17 @@
         height: eh
       });
     },
+    expandClientSection: function(e) {
+      var $this = $(this);
+      if ($this.hasClass('expand')){
+        $this.closest('.client').find('.exp').show();
+        $this.removeClass('expand').addClass('collapse');
+      } else {
+        $this.closest('.client').find('.exp').hide();
+        $this.removeClass('collapse').addClass('expand');
+      }
+      return false;
+    },
     collapseField: function(e) {
       var $this = $(this);
       var eh = $this.data('collapsed-height') || '30px';
@@ -167,5 +178,6 @@
     .delegate('input.currency', 'focusout', tellMe.currencyFieldFocusOut)
     .on('nested:fieldAdded', function(event){
       tellMe.init_everything(event.field);
-    });
+    })
+    .delegate('span.expand a', 'click', tellMe.expandClientSection);
 })(jQuery);

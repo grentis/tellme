@@ -8,7 +8,7 @@
   <% if (invoice.num_payments > 0) %>
     <% invoice.payments.each do |m| %>
       <li>
-        <%= m.v_date %> - <%= write_currency m.value %>
+        <i class="icon-<%= m.paid? ? 'checked' : 'unchecked' %>-mini"></i> <%= m.v_date %> - <%= write_currency m.value %>
       </li>
     <% end %>
   <% else %>

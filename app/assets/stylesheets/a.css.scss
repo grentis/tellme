@@ -100,7 +100,7 @@ input {
     margin:-13px 0 0 0;
     padding:0;
     height:20px;
-    width:150px;
+    width:200px;
     display: none;
     list-style-type: none;
     text-align: right;
@@ -245,3 +245,78 @@ div.note {
   }
 }
 
+.icon-checked {
+  width:17px;
+  background:image-url('checked.png') 0 0; 
+}
+.icon-checked-mini {
+  width:12px;
+  height:10px;
+  background:image-url('checked-mini.png') 0 0; 
+}
+.icon-unchecked {
+   background:image-url('unchecked.png') 0 0; 
+}
+.icon-unchecked-mini {
+  width:10px;
+  height:10px;
+  background:image-url('unchecked-mini.png') 0 0; 
+}
+
+#invoice-details {
+  top:50px;
+  margin-top:0 !important;
+
+  .client {
+    .row-fluid {
+      margin-bottom: 5px;
+      padding-bottom:5px;
+      border-bottom:1px dotted #CCC;
+
+      [class*="span"] {
+        min-height: 20px;
+      }
+    }
+    span.expand {
+      text-align: right;
+      a.expand {
+        i {
+          background-position: -313px -119px;
+        }
+        &:after {
+          content: ' espandi';
+        }
+      }
+      a.collapse {
+        i {
+          background-position: -288px -120px;
+        }
+        &:after {
+          content: ' comprimi';
+        } 
+      }
+    }
+    .name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .exp {
+      display: none;
+    }
+  }
+
+  pre {
+    margin:0;
+    display: inline-block;
+    border:0;
+    padding:0;
+    min-height: 20px;
+    background-color: transparent;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    &.note {
+      background: image-url('comments.png') no-repeat 0 3px;
+      padding-left: 25px;
+    }
+  }
+}

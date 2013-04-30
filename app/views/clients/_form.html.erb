@@ -13,14 +13,12 @@
     </div>
   </div>
   <div class="modal-body">
-    <div class="control-group">
-      <div class="row-fluid">
-        <span class="span12">
-          <%= f.label :name, 'Nome' %>
-          <%= f.text_field :name, class: 'span12' %>
-          <%= f.errors :name, class: 'help-inline' %>
-        </span>
-      </div>
+    <div class="control-group row-fluid <%= f.has_errors? :name %>">
+      <span class="span12">
+        <%= f.label :name, 'Nome', class: 'control-label' %>
+        <%= f.text_field :name, class: 'span12' %>
+        <%= f.errors :name, class: 'help-block' %>
+      </span>
     </div>
     <div class="control-group">
       <div class="row-fluid">
@@ -35,12 +33,12 @@
       <div class="row-fluid">
         <span class="span4 iva">
           <%= f.label :iva, 'IVA' %>
-          <%= f.text_field :iva, class: 'span12' %>
+          <%= f.text_field :iva, class: 'span12', maxlength: 11 %>
           <%= f.errors :iva, class: 'help-inline' %>
         </span>
         <span class="span4 cf">
           <%= f.label :cf, 'Codice fiscale' %>
-          <%= f.text_field :cf, class: 'span12' %>
+          <%= f.text_field :cf, class: 'span12', maxlength: 16 %>
           <%= f.errors :cf, class: 'help-inline' %>
         </span>
       </div>
@@ -67,12 +65,12 @@
       <div class="row-fluid">
         <span class="span2">
           <%= f.label :abi, 'ABI' %>
-          <%= f.text_field :abi, class: 'span12' %>
+          <%= f.text_field :abi, class: 'span12', maxlength: 5 %>
           <%= f.errors :abi, class: 'help-inline' %>
         </span>
         <span class="span2">
           <%= f.label :cab, 'CAB' %>
-          <%= f.text_field :cab, class: 'span12' %>
+          <%= f.text_field :cab, class: 'span12', maxlength: 5 %>
           <%= f.errors :cab, class: 'help-inline' %>
         </span>
         <span class="span4 offset4 currency">
@@ -84,7 +82,14 @@
     </div>
   </div>
   <div class="modal-footer">
+    <% unless @client.new_record? %>
+      <%= link_to client_path(@client), method: :delete, class: 'btn btn-danger pull-left', confirm: 'sicuro?' do %>
+        <i class="icon-trash"></i> Elimina
+      <% end %>
+    <% end %>
     <%= link_to "Annulla",  cancel_clients_path, class: 'btn', remote: true %>
-    <%= f.button "Salva", type: :submit, class: 'btn btn-info' %>
+    <%= button_tag type: :submit, class: 'btn btn-info' do %>
+      <i class="icon-ok"></i> Salva
+    <% end %>
   </div>
 <% end %>

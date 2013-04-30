@@ -42,7 +42,7 @@ Tellme::Application.routes.draw do
   constraints OnlyAjaxRequest.new do
     get 'month/:month/payments' => 'payments#by_month'
 
-    resources :clients, only: [ :new, :edit, :cancel, :create, :update ] do
+    resources :clients, only: [ :new, :edit, :show, :cancel, :create, :update ] do
       collection do
         get :cancel
       end

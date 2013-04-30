@@ -11,6 +11,12 @@ module ApplicationHelper
       end
     end
 
+    def has_errors?(method, options = {})
+      unless object.errors[method].blank?
+        return 'error'
+      end
+    end
+
     def currency_field(method, options = {})
       @template.currency_field(@object_name, method, objectify_options(options))
     end

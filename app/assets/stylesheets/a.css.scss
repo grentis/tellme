@@ -7,6 +7,10 @@ html, body {
   font-size: 13px;
 }
 
+form {
+  margin:0;
+}
+
 .form-cliente {
 
   .iva, .cf {
@@ -37,7 +41,7 @@ textarea.expand {
 }
 
 textarea.note {
-  background:image-url('note.png') no-repeat 5px 5px;
+  background:image-url('note.png') no-repeat 5px 8px;
   padding-left: 25px;
 }
 
@@ -143,6 +147,12 @@ input {
       display: block;
     }
   }
+}
+
+.control-group.error .control-label,
+.control-group.error .help-block,
+.control-group.error .help-inline {
+  color: #b94a48;
 }
 
 .payment.media .popover {
@@ -302,7 +312,7 @@ div.note {
   background:image-url('unchecked-mini.png') 0 0;
 }
 
-.invoice-popover {
+.invoice-popover, #client-details {
 
   .client, .invoice {
     .row-fluid {
@@ -365,6 +375,38 @@ div.note {
     &.note {
       background: image-url('comments.png') no-repeat 0 3px;
       padding-left: 25px;
+    }
+  }
+}
+
+#client-details {
+
+  .invoices {
+    list-style-type: none;
+    margin:0;
+    padding:0;
+
+    & > li {
+      border-bottom:1px solid #CCC;
+      padding:10px;
+
+      .actions {
+        display: none;
+      }
+
+      &:hover {
+        background-color:#F0F1EB;
+
+        .actions {
+          display: block;
+        }
+      }
+    }
+
+    & > li:first-child {
+      &:hover {
+        background-color: transparent;
+      }
     }
   }
 }

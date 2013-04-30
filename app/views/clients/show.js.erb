@@ -1,0 +1,7 @@
+var $client_details = $('#client-details');
+if ($client_details.length <= 0) {
+  $client_details = $('<div data-width="700" class="modal" id="client-details"></div>').appendTo($('body'))  
+}
+$client_details.html("<%= escape_javascript(render partial: 'details', locals: { client: @client }) %>").on('hidden', function(e) { $(this).remove(); } ).modal();
+
+window.tellMe.init_everything($client_details);

@@ -9,6 +9,10 @@ class ClientsController < ApplicationController
     @client = Client.find(params[:id])
   end
 
+  def show
+    @client = Client.find(params[:id])
+  end
+
   def update
     @client = Client.find(params[:id])
     if @client.update_attributes(params[:client])

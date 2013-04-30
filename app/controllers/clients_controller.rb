@@ -14,6 +14,7 @@ class ClientsController < ApplicationController
     if @client.update_attributes(params[:client])
       redirect_to dashboard_index_path
     else
+      flash.now[:error] = 'sdadas'
       render action: :edit
     end
   end

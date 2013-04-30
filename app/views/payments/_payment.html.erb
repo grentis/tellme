@@ -7,7 +7,7 @@
       <span class="client has-popup" data-width="400px" data-placement="bottom" data-content='<%= render partial: 'clients/popup_content', locals: { client: payment.client } %>' data-title='<%= render partial: 'clients/popup_title', locals: { client: payment.client } %>'><%= payment.client.name %></span>
     </h4>
     <span class="info">
-      <span class="invoice has-popup" data-width="400px" data-placement="bottom" data-content='<%= render partial: 'invoices/popup_content', locals: { invoice: payment.invoice } %>' data-title='<%= render partial: 'invoices/popup_title', locals: { invoice: payment.invoice } %>'>
+      <span class="invoice has-popup" data-width="500px" data-placement="bottom" data-content='<%= render partial: 'invoices/popup_content', locals: { invoice: payment.invoice } %>' data-title='<%= render partial: 'invoices/popup_title', locals: { invoice: payment.invoice } %>'>
         rata <%= payment.index %> di <%= payment.invoice.num_payments %> per la fattura <%= payment.invoice.number %> del <%= payment.invoice.date.strftime('%d/%b/%Y') %>
       </span>
       <span class="note"></span>

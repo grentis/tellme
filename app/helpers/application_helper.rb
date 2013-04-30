@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   #class MyFormBuilder < ActionView::Helpers::FormBuilder
   class MyFormBuilder < NestedForm::Builder
 
@@ -47,5 +48,11 @@ module ApplicationHelper
 
   def write_currency(value)
     number_to_currency(value, unit: "&euro;", format: "%n %u", separator: ",", delimiter: ".")
+  end
+
+  def show_flash
+    unless flash.empty?
+      render partial: 'dashboard/flash', locals: { flash: flash }
+    end
   end
 end

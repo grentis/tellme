@@ -1,11 +1,6 @@
 fattura n. <%= invoice.number %> del <%= invoice.date.strftime('%d %B %Y') %>
 <ul class="actions">
   <li>
-    <%= link_to invoice_path(invoice), remote: true, class: 'btn btn-mini' do %>
-      <i class="icon-eye-open" title="Dettagli"></i> dettagli
-    <% end %>
-  </li>
-  <li>
     <%= link_to edit_invoice_path(invoice), remote: true, class: 'btn btn-mini' do %>
       <i class="icon-pencil" title="Modifica"></i> modifica
     <% end %>

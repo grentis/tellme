@@ -6,10 +6,6 @@ class InvoicesController < ApplicationController
     render action: :edit
   end
 
-  def show
-    @invoice = Invoice.find(params[:id])
-  end
-
   def edit
     @invoice = Invoice.find(params[:id])
     (3 - @invoice.payments.count).times { @invoice.payments.build }

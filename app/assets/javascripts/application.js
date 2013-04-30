@@ -29,12 +29,23 @@
 
 (function($) {
 
+  $.fn.wait = function(time, type) {
+    time = time || 1000;
+    type = type || "fx";
+    return this.queue(type, function() {
+        var self = this;
+        setTimeout(function() {
+            $(self).dequeue();
+        }, time);
+    });
+  };
+
   window.TellMe = function() {
     var that = this;
     setTimeout(function(){
       that.init_everything($(document));
     }, 100);
-    
+
 
     this.currencyFieldKeyDown = $.proxy(this.currencyFieldKeyDown, this);
     this.currencyFieldKeyUp = $.proxy(this.currencyFieldKeyUp, this);
@@ -179,5 +190,17 @@
     .on('nested:fieldAdded', function(event){
       tellMe.init_everything(event.field);
     })
-    .delegate('span.expand a', 'click', tellMe.expandClientSection);
+    .delegate('span.expand a', 'click', tellMe.expandClientSection)
+    .ajaxComplete(function(event, request, settings) {
+      msg = request.getResponseHeader("X-Message")
+      alert_type = 'alert-success'
+      if (request.getResponseHeader("X-Message-Type").indexOf("error") != -1)
+        alert_type = 'alert-error'
+      if (msg) {
+        $("#flash_hook").replaceWith("<div id='flash_hook'><p>&nbsp;</p><div class='row-fluid'><div class='span10 offset2'><div class='alert " + alert_type + "'><button type='button' class='close' data-dismiss='alert'>&times;</button>" + msg + "</div></div></div></div>").wait(800).hide();
+      } else {
+        $("#flash_hook").replaceWith("<div id='flash_hook'></div>");
+      }
+    });
 })(jQuery);
+

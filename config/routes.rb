@@ -1,13 +1,13 @@
 Tellme::Application.routes.draw do
 
   class OnlyAjaxRequest
-    def matches?(request) 
+    def matches?(request)
       request.xhr?
     end
   end
 
   class OnlyHttpRequest
-    def matches?(request) 
+    def matches?(request)
       !request.xhr?
     end
   end
@@ -41,7 +41,7 @@ Tellme::Application.routes.draw do
 
   constraints OnlyAjaxRequest.new do
     get 'month/:month/payments' => 'payments#by_month'
-    
+
     resources :clients, only: [ :new, :edit, :cancel, :create, :update ] do
       collection do
         get :cancel
@@ -49,7 +49,7 @@ Tellme::Application.routes.draw do
       resources :invoices, only: [ :new ]
     end
 
-    resources :invoices, only: [ :new, :show, :edit, :cancel, :create, :update ] do
+    resources :invoices, only: [ :new, :edit, :cancel, :create, :update ] do
       collection do
         get :cancel
       end
@@ -87,7 +87,7 @@ Tellme::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'dashboard#index'
+  root to: 'dashboard#index'
 
   # See how all your routes lay out with "rake routes"
 

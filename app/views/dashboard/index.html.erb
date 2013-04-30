@@ -1,18 +1,10 @@
-<ul id="expired">
-  <%= render :partial => "payments/payment", :collection => @expired, as: :payment %>
+<ul id="expired" class="well">
+  <% if @expired.size > 0 %>
+    <%= render :partial => "payments/payment", :collection => @expired, as: :payment %>
+  <% else %>
+    <li class="payment media">Hurra! non ci sono ritardi nei pagamenti</li>
+  <% end %>
 </ul>
-<div style="margin-bottom:50px"></div>
-
-
-<!--
-
-<%= link_to 'Nuovo cliente', new_client_path, remote: true %>
-
-<br/>
-
-<%= link_to 'Nuova fattura', new_invoice_path, remote: true %>
-
--->
 
 <div class="row-fluid" id="timeline">
   <div class="span12">
@@ -27,34 +19,7 @@
           <%= render "payments/payments", { payments: Payment.by_index(index) }%>
         </div>
         <i></i>
-      </div>  
+      </div>
     <% end %>
   </div>
 </div>
-
-
-Elenco clienti
-<!--table class="table">
-  <% @clients.each do |c| %>
-    <tr>
-      <td><%= c.name %></td>
-      <td><%= link_to 'Nuova fattura', new_client_invoice_path(c), remote: true  %></td>
-      <td><%= link_to 'Modifica', edit_client_path(c), remote: true  %></td>
-      <td><%= link_to 'Elimina', client_path(c), method: :delete %></td>
-    </tr>
-    <tr>
-      <td colspan="3">
-          <table>
-            <% c.invoices.each do |i| %>
-              <tr>
-                <td><%= i.amount %></td>
-                <td><%= i.date %></td>
-                <td><%= link_to 'Modifica', edit_invoice_path(i), remote: true %></td>
-                <td><%= link_to 'Elimina', invoice_path(i), method: :delete %></td>
-              </tr>
-            <% end %>
-          </table>
-      </td>
-    </tr>
-  <% end %>
-</table-->

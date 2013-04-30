@@ -9,6 +9,20 @@
 <body>
   <div class="page-container">
     <div class="container" style="position: relative">
+      <div id="flash_hook"><%= show_flash %></div>
+      <div class="navbar" style="margin-top:10px;">
+        <div class="navbar-inner">
+          <a class="brand" href="/">Tell Me</a>
+          <div class="pull-right">
+            <%= link_to new_client_path, class: 'btn btn-info', remote: true do %>
+              <i class="icon-plus"></i> nuovo cliente
+            <% end %>
+            <%= link_to new_invoice_path, class: 'btn btn-info', remote: true do %>
+              <i class="icon-plus"></i> nuova fattura
+            <% end %>
+          </div>
+        </div>
+      </div>
       <%= yield %>
     </div>
   </div>

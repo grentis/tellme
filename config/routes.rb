@@ -62,7 +62,8 @@ Tellme::Application.routes.draw do
     end
   end
 
-  resources :clients, only: [:destroy ], constraints: OnlyHttpRequest.new
+  resources :clients, only: [:destroy], constraints: OnlyHttpRequest.new
+  resources :invoices, only: [:destroy], constraints: OnlyHttpRequest.new
 
   # Sample resource route with sub-resources:
   #   resources :products do

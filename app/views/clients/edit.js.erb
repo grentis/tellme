@@ -1,6 +1,6 @@
 var $client_form = $('#client-form');
 if ($client_form.length <= 0) {
-  $client_form = $('<div class="modal" id="client-form"></div>').appendTo($('body'))  
+  $client_form = $('<div data-width="650" class="modal" id="client-form"></div>').appendTo($('body'))  
 }
 $client_form.html("<%= escape_javascript(render partial: 'form') %>").on('hidden', function(e) { $(this).remove(); } ).modal();
 

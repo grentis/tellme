@@ -84,7 +84,7 @@
   </div>
   <div class="modal-footer">
     <% unless @invoice.new_record? %>
-      <%= link_to client_path(@invoice), method: :delete, class: 'btn btn-danger pull-left', confirm: 'sicuro?' do %>
+      <%= link_to invoice_path(@invoice), method: :delete, class: 'btn btn-danger pull-left', confirm: 'sicuro?' do %>
         <i class="icon-trash"></i> Elimina
       <% end %>
     <% end %>

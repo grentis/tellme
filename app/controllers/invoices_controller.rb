@@ -33,4 +33,13 @@ class InvoicesController < ApplicationController
       render action: :edit
     end
   end
+
+  def destroy
+    @invoice = Invoice.find(params[:id])
+    if @invoice.destroy
+      redirect_to dashboard_index_path
+    else
+      redirect_to dashboard_index_path
+    end
+  end
 end

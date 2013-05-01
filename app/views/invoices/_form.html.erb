@@ -7,78 +7,90 @@
       </span>
       <span class="span7 offset1">
         <%= f.text_area :note, class: 'span12 note expand' %>
-        <%= f.errors :note, class: 'help-inline' %>
+        <%= f.errors :note, class: 'help-block' %>
       </span>
     </div>
   </div>
   <div class="modal-body">
-    <div class="control-group">
-      <div class="row-fluid">
-        <span class="span11">
-          <%= f.label :client_id %>
-          <%= f.select :client_id, options_for_select(Client.all.map{ |c| [ c.name, c.id, { 'data-address' => c.address, 'data-note' => c.note } ] }, @invoice.client_id) %>
-          <%= f.errors :client_id, class: 'help-inline' %>
-        </span>
-        <span class="span1">
-          <%= link_to 'Add', new_client_path(fi: 1), remote: true %>
-        </span>
-      </div>
+    <div class="control-group row-fluid <%= f.has_errors? :client_id %>">
+      <span class="span10">
+        <%= f.label :client_id, 'Cliente', class: 'control-label' %>
+        <%= f.select :client_id, options_for_select(Client.all.map{ |c| [ c.name, c.id, { 'data-address' => c.address, 'data-note' => c.note } ] }, @invoice.client_id) %>
+        <%= f.errors :client_id, class: 'help-block' %>
+      </span>
+      <span class="span2">
+        <%= link_to new_client_path(fi: 1), remote: true, class: 'btn btn-mini' do %>
+          <i class="icon-plus"></i> nuovo cliente
+        <% end %>
+      </span>
     </div>
-    <div class="control-group">
-      <div class="row-fluid">
-        <span class="span2">
-          <%= f.label :number %>
-          <%= f.text_field :number, class: 'span12' %>
-          <%= f.errors :number, class: 'help-inline' %>
-        </span>
-        <span class="span2">
-          <%= f.label :date %>
-          <%= f.text_field :date, class: 'span12 date', value: ( @invoice.date.strftime("%d.%m.%Y") unless @invoice.date.blank? ) %>
-          <%= f.errors :date, class: 'help-inline' %>
-        </span>
-      </div>
+    <div class="row-fluid">
+      <span class="control-group span2 <%= f.has_errors? :number %>">
+        <%= f.label :number, 'Numero', class: 'control-label' %>
+        <%= f.text_field :number, class: 'span12' %>
+        <%= f.errors :number, class: 'help-block' %>
+      </span>
+      <span class="control-group span2 <%= f.has_errors? :date %>">
+        <%= f.label :date, 'Data', class: 'control-label' %>
+        <%= f.text_field :date, class: 'span12 date', value: ( @invoice.date.strftime("%d.%m.%Y") unless @invoice.date.blank? ) %>
+        <%= f.errors :date, class: 'help-block' %>
+      </span>
     </div>
-    <div class="control-group">
-      <div class="row-fluid">
-        <span class="span2">
-          <%= f.label :amount %>
-          <%= f.currency_field :amount, class: 'span12 currency' %>
-          <%= f.errors :amount, class: 'help-inline' %>
-        </span>
-      </div>
+    <div class="control-group row-fluid <%= f.has_errors? :amount %>">
+      <span class="span2">
+        <%= f.label :amount, 'Totale', class: 'control-label' %>
+        <%= f.currency_field :amount, class: 'span12 currency' %>
+        <%= f.errors :amount, class: 'help-block' %>
+      </span>
     </div>
-    <div class="control-group">
-      <div class="row-fluid">
-        <span class="span2">Importo</span>
-        <span class="span2">Data</span>
-        <span class="span6 offset2">Nota pagamento</span>
-      </div>
+    <div class="control-group row-fluid">
+      <% unless @invoice.new_record? %>
+        <span class="span1 checkbox"></span>
+      <% end %>
+      <span class="span2">Importo</span>
+      <span class="span2">Data</span>
+      <span class="span5 offset2">Nota pagamento</span>
       <%= f.fields_for :payments do |builder| %>
         <div class="row-fluid single-payment">
-          <span class="span2">
+          <% unless @invoice.new_record? %>
+            <span class="control-group span1 checkbox <%= builder.has_errors? :paid %>">
+              <%= builder.check_box :paid, class: 'span12' %>
+              <%= builder.errors :paid, class: 'help-block' %>
+            </span>
+          <% end %>
+          <span class="control-group span2 <%= builder.has_errors? :value %>">
             <%= builder.currency_field :value, class: 'span12 currency' %>
-            <%= builder.errors :value %>
+            <%= builder.errors :value, class: 'help-block' %>
           </span>
-          <span class="span2">
+          <span class="control-group span2 <%= builder.has_errors? :v_date %>">
             <%= builder.text_field :v_date, class: 'span12 date', data: { 'date-type' => :month } %>
-            <%= builder.errors :v_date %>
+            <%= builder.errors :v_date, class: 'help-block' %>
           </span>
-          <span class="span6">
+          <span class="control-group span5 <%= builder.has_errors? :note %>">
             <%= builder.text_area :note, class: 'span12 note expand' %>
-            <%= builder.errors :note %>
+            <%= builder.errors :note, class: 'help-block' %>
           </span>
-          <span class="span2">
-            <%= builder.link_to_remove(class: 'btn btn-mini') do %>
-              <i class="icon-trash"></i> Elimina rata
+          <span class="control-group span2">
+            <%= builder.link_to_remove(class: 'btn btn-mini btn-danger') do %>
+              <i class="icon-trash"></i> elimina rata
             <% end %>
           </span>
         </div>
       <% end %>
-      <%= f.link_to_add "Aggiungi rata", :payments %>
+      <%= f.link_to_add :payments, class: 'btn btn-mini' do %>
+        <i class="icon-plus"></i> aggiungi rata
+      <% end %>
     </div>
   </div>
   <div class="modal-footer">
+    <% unless @invoice.new_record? %>
+      <%= link_to client_path(@invoice), method: :delete, class: 'btn btn-danger pull-left', confirm: 'sicuro?' do %>
+        <i class="icon-trash"></i> Elimina
+      <% end %>
+    <% end %>
     <%= link_to "Annulla",  cancel_invoices_path, class: 'btn', remote: true %>
-    <%= f.button "Salva", type: :submit, class: 'btn btn-info' %>
+    <%= button_tag type: :submit, class: 'btn btn-info' do %>
+      <i class="icon-ok"></i> Salva
+    <% end %>
   </div>
 <% end %>

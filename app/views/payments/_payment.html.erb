@@ -8,7 +8,7 @@
     </h4>
     <span class="info">
       <span class="invoice has-popup" data-width="500px" data-placement="bottom" data-content='<%= render partial: 'invoices/popup_content', locals: { invoice: payment.invoice } %>' data-title='<%= render partial: 'invoices/popup_title', locals: { invoice: payment.invoice } %>'>
-        rata <%= payment.index %> di <%= payment.invoice.num_payments %> per la fattura <%= payment.invoice.number %> del <%= payment.invoice.date.strftime('%d/%b/%Y') %>
+        rata <%= payment.index %> di <%= payment.invoice.num_payments %> per la fattura n. <%= payment.invoice.number %> del <%= payment.invoice.date.strftime('%d/%b/%Y') %>
       </span>
       <span class="note"></span>
     </span>
@@ -23,10 +23,10 @@
         <% end %>
       <% end %>
     </li>
-    <li>
+    <!--li>
       <%= link_to payment_path(payment), confirm: 'Sei sicuro di voler cancellare questa rata?', method: :delete, remote: true, title: 'elimina rata', class: 'btn btn-mini' do %>
         <i class="icon-trash"></i> elimina
       <% end %>
-    </li>
+    </li-->
   </ul>
 </li>

@@ -13,6 +13,10 @@
       <div class="navbar" style="margin-top:10px;">
         <div class="navbar-inner">
           <a class="brand" href="/">Tell Me</a>
+          <form class="navbar-form pull-left">
+            <%= select_tag :filter_client_id, (render partial: 'clients/option', collection: Client.all, as: :client) %>
+            <button type="submit" class="btn">Submit</button>
+          </form>
           <div class="pull-right">
             <%= link_to new_client_path, class: 'btn btn-info', remote: true do %>
               <i class="icon-plus"></i> nuovo cliente

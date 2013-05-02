@@ -373,7 +373,7 @@ div.note {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
     &.note {
-      background: image-url('comments.png') no-repeat 0 3px;
+      background: image-url('comments.png') no-repeat 0 6px;
       padding-left: 25px;
     }
   }
@@ -417,4 +417,8 @@ div.note {
 .span1.checkbox {
   width:20px;
   padding:0;
+}
+
+.modal-header .actions.pull-right {
+  margin-right:10px;
 }

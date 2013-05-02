@@ -22,6 +22,10 @@ module ApplicationHelper
     end
   end
 
+  def show_note(note)
+    "<pre class=\"note\">#{note.blank? ? 'nessuna nota' : note}</pre>".html_safe
+  end
+
 
   def month_as_string(month_index)
     case month_index - 1

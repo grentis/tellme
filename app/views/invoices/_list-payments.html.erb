@@ -1,0 +1,12 @@
+<ul class="list-payments">
+  <% if (invoice.num_payments > 0) %>
+    <% invoice.payments.each do |m| %>
+      <li>
+        <span class="label label-<%= m.paid? ? 'success' : m.expired? ? 'important' : 'nocolor'%> ">&nbsp;</span>
+        <%= m.v_date %> - <%= write_currency m.value %>
+      </li>
+    <% end %>
+  <% else %>
+    <li>nessuna rata specificata</li>
+  <% end %>
+</ul>

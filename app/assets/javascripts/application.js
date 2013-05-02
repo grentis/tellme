@@ -56,9 +56,17 @@
     init_everything: function(context) {
       this.init_datepicker(context);
       this.init_clickover(context);
+      this.init_filterClientSelect(context);
+    },
+    init_filterClientSelect: function(context) {
+      $('#filter_client_id', context).select2({
+        formatResult: function(state) {
+          return window.tellMe.clientSelect2Format(state);
+        },
+        escapeMarkup: function(m) { return m; }
+      });
     },
     init_clickover: function(context) {
-      console.log(context)
       $('.has-popup', context).clickover({
         html: true
       });
@@ -177,6 +185,14 @@
     currencyFieldFocusOut: function(e){
       var $this = $(e.currentTarget);
       this.currencyFieldParse($this);
+    },
+    clientSelect2Format: function(state){
+      if (!state.id) return state.text + "&nbsp;";
+      var $originalOption = $(state.element);
+      var p = "<span>"+state.text+"</span>";
+      p += ($originalOption.data('address') ? ("<span style='display:block;font-size:10px;line-height:16px'>" + $originalOption.data('address') + "</span>") : '');
+      p += ($originalOption.data('note') ? ("<span style='display:block;font-size:10px;line-height:16px;padding-bottom:5px'>" + $originalOption.data('note') + "</span>") : '');
+      return p;
     }
   };
 

@@ -15,7 +15,10 @@
     <div class="control-group row-fluid <%= f.has_errors? :client_id %>">
       <span class="span10">
         <%= f.label :client_id, 'Cliente', class: 'control-label' %>
-        <%= f.select :client_id, options_for_select(Client.all.map{ |c| [ c.name, c.id, { 'data-address' => c.address, 'data-note' => c.note } ] }, @invoice.client_id) %>
+        <%= f.select :client_id, (render partial: 'clients/option', collection: Client.all, as: :client) %>
+        <%
+        #f.select :client_id, options_for_select(Client.all.map{ |c| [ c.name, c.id, { 'data-address' => c.address, 'data-note' => c.note.blank? ? 'nessuna nota' : c.note } ] }, @invoice.client_id)
+        %>
         <%= f.errors :client_id, class: 'help-block' %>
       </span>
       <span class="span2">

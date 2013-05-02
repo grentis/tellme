@@ -1,57 +1,14 @@
 <div class="invoice-popover">
-  <div class="client">
-    <div class="row-fluid">
-      <span class="span10 name"><%= invoice.client.name %></span>
-      <span class="span2 expand"><a href="#" class="expand"><i class="icon-chevron-down"></i></a></span>
-    </div>
-    <div class="exp">
-      <div class="row-fluid">
-        <span class="span2">Indirizzo:</span>
-        <span class="span10"><pre class="address"><%= invoice.client.address %></pre></span>
-      </div>
-      <div class="row-fluid">
-        <span class="span3">IVA: <%= invoice.client.iva %></span>
-        <span class="span3">Codice fiscale: <%= invoice.client.cf %></span>
-      </div>
-      <div class="row-fluid">
-        <span class="span12">Tipo di pagamento: <%= invoice.client.payment_type %></span>
-      </div>
-      <div class="row-fluid">
-        <span class="span1">Banca:</span>
-        <span class="span11"><pre class="bank"><%= invoice.client.bank %></pre></span>
-      </div>
-      <div class="row-fluid">
-        <span class="span2 abi">ABI: <%= invoice.client.abi %></span>
-        <span class="span2 cab">CAB: <%= invoice.client.cab %></span>
-        <span class="span5 offset3 hourly_cost">Costo orario: <%= write_currency invoice.client.hourly_cost %></span>
-      </div>
-      <div class="row-fluid">
-        <span class="span12">
-          <pre class="note"><%= invoice.client.note %></pre>
-        </span>
-      </div>
-    </div>
-  </div>
+  <%= render partial: 'clients/details-data', locals: { client: invoice.client } %>
   <div class="invoice">
     <div class="row-fluid">
       <span class="span12">totale fattura: <%= write_currency invoice.amount %></span>
     </div>
     <div class="row-fluid">
       <span class="span12">
-        <pre class="note"><%= invoice.note.blank? ? 'nessuna nota' : invoice.note %></pre>
+        <%= show_note invoice.note %>
       </span>
     </div>
   </div>
-  <ul class="list-payments">
-    <% if (invoice.num_payments > 0) %>
-      <% invoice.payments.each do |m| %>
-        <li>
-          <span class="label label-<%= m.paid? ? 'success' : m.expired? ? 'important' : 'nocolor'%> ">&nbsp;</span>
-          <%= m.v_date %> - <%= write_currency m.value %>
-        </li>
-      <% end %>
-    <% else %>
-      <li>nessuna rata specificata</li>
-    <% end %>
-  </ul>
+  <%= render partial: 'invoices/list-payments', locals: { invoice: invoice } %>
 </div>

@@ -1,1 +1,1 @@
-<option value="<%= @client.id %>" data-address="<%= @client.address %>" data-note="<%= @client.note %>"><%= @client.name %></option>
+<option value="<%= client.id %>" data-address="<%= client.address %>" data-note="<%= client.note.blank? ? 'nessuna nota' : client.note %>"><%= client.name %></option>

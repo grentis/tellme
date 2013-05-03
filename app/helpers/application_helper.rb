@@ -65,4 +65,19 @@ module ApplicationHelper
       render partial: 'dashboard/flash', locals: { flash: flash }
     end
   end
+
+  def flash_message
+    [:error, :warning, :notice].each do |type|
+      return flash[type] unless flash[type].blank?
+    end
+    return ''
+  end
+
+  def flash_type
+    [:error, :warning, :notice].each do |type|
+      unless flash[type].blank?
+        return type.to_s == 'notice' ? 'info' : type
+      end
+    end
+  end
 end

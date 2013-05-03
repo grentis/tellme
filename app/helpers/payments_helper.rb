@@ -1,5 +1,5 @@
 module PaymentsHelper
-  def label_tag(payment, source = 'expired')
+  def payment_label_tag(payment, source = 'expired')
     if payment.paid?
       return content_tag :span, class: 'label label-success pull-left'  do
         "pagato"
@@ -17,5 +17,10 @@ module PaymentsHelper
         "da pagare"
       end
     end
+  end
+
+  def is_filtered?(payment)
+    return (payment.client.id == @client_filter ? '' : 'filtered') unless @client_filter.blank?
+    return ''
   end
 end

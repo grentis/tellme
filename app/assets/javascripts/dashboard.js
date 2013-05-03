@@ -15,6 +15,7 @@ Date.prototype.getFullMonth = function () {
   }
 }
 
+$(function() {
 
   function index_from_date(date) {
     var now = new Date()
@@ -27,9 +28,28 @@ Date.prototype.getFullMonth = function () {
 
   var date_from_index = function(index) {
     var d = new Date();
-    d.setMonth(d.getMonth()+parseInt(index));
+    d.setMonth(d.getMonth() + parseInt(index));
     return new Date(d);
   }
+
+  $("#timeline").mousewheel(function(event, delta) {
+    var t = null;
+    if (delta > 0) {
+      var first = $('#timeline .t-month:first-child');
+      if (first.position().top >= -40) {
+        first = new_month(-1);
+      }
+    } else {
+      var last = $('#timeline .t-month:last-child');
+      if (last.position().top <= $(this).height() - 40) {
+        new_month(+1);
+      }
+    }
+    //delta = wheelDistance(event.originalEvent);
+    //move_timeline($(this).scrollTop() - (delta * 100), 10);
+    move_timeline($(this).scrollTop() - (delta * 50), 10);
+    return false;
+  });
 
   var new_month = function(type){
     var $from = (type == 1) ? $('#timeline .t-month:last-child') : $('#timeline .t-month:first-child');
@@ -71,51 +91,31 @@ Date.prototype.getFullMonth = function () {
 
   var move_timeline = function(position, speed, callback) {
     if ($("#timeline").is(':animated')) return;
-    $("#timeline").stop(true, true).scrollTo(position, {duration: speed, onAfter: function() {
-      var $that = $(this);
-      var $active = $(".t-month.active", $that);
-      $.each($(".t-month", $that), function(index, value) {
-        var $this = $(this);
-        if ($this.position().top >= -60) {
-          var d = date_from_index($this.attr('data-index'));
-          var $cmonth = $('#change_month');
-          $('.select .value', $cmonth).attr("data-index", d.getMonth()).html(d.getFullMonth());
-          $('input', $cmonth).val(d.getFullYear());
-          if ($active.length <= 0 || $active.attr('data-index') != $this.attr('data-index')) {
-            $active.removeClass('active');
-            $this.addClass('active');
+    $("#timeline").stop(true, true).scrollTo(position, {
+      duration: speed,
+      onAfter: function() {
+        var $that = $(this);
+        var $active = $(".t-month.active", $that);
+        $.each($(".t-month", $that), function(index, value) {
+          var $this = $(this);
+          if ($this.position().top >= -60) {
+            var d = date_from_index($this.attr('data-index'));
+            var $cmonth = $('#change_month');
+            $('.select .value', $cmonth).attr("data-index", d.getMonth()).html(d.getFullMonth());
+            $('input', $cmonth).val(d.getFullYear());
+            if ($active.length <= 0 || $active.attr('data-index') != $this.attr('data-index')) {
+              $active.removeClass('active');
+              $this.addClass('active');
+            }
+            return false;
           }
-          return false;
+        });
+        if (typeof callback == 'function') {
+          callback.call(this);
         }
-      });
-      if (typeof callback == 'function') {
-        callback.call(this);
       }
-    }});
+    });
   }
-
-
-
-$(function() {
-
-  $("#timeline").mousewheel(function(event, delta) {
-    var t = null;
-    if (delta > 0) {
-      var first = $('#timeline .t-month:first-child');
-      if (first.position().top >= -40) {
-        first = new_month(-1);
-      }
-    } else {
-      var last = $('#timeline .t-month:last-child');
-      if (last.position().top <= $(this).height() - 40) {
-        new_month(+1);
-      }
-    }
-    //delta = wheelDistance(event.originalEvent);
-    //move_timeline($(this).scrollTop() - (delta * 100), 10);
-    move_timeline($(this).scrollTop() - (delta * 50), 10);
-    return false;
-  });
 
   var wheelDistance = function(evt){
     if (!evt) evt = event;
@@ -126,8 +126,6 @@ $(function() {
       else return -d/3;              // Firefox;         TODO: do not /3 for OS X
     } else return w/120;             // IE/Safari/Chrome TODO: /3 for Chrome OS X
   };
-
-
 
   $(document).on('click.ml', '#change_month button', function(event){
     var $this = $(this);
@@ -154,7 +152,5 @@ $(function() {
   });
 
   move_timeline($('.t-month[data-index=0]'), 500);
-
-
 
 });

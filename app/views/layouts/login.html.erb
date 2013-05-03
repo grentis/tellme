@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tellme</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="login">
+  <div class="page-container">
+    <div class="container" style="position: relative">
+      <%= yield %>
+    </div>
+  </div>
+</body>
+</html>

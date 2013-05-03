@@ -2,7 +2,8 @@ var $invoice_form = $('#invoice-form');
 var $client_form = $('#client-form');
 if ($invoice_form.length > 0) {
   $('#client-form').modal('hide');
-  $('#invoice_client_id', $invoice_form).append("<%= escape_javascript(render partial: 'option', locals: { client: @client }) %>").val('<%= @client.id %>').trigger('change');
+  $('#invoice_client_id', $invoice_form).append("<%= escape_javascript(render partial: 'option', locals: { client: @client, filter: @client_filter }) %>").val('<%= @client.id %>').trigger('change');
+  $('#filter_client_id').append("<%= escape_javascript(render partial: 'option', locals: { client: @client, filter: @client_filter }) %>").val('<%= @client.id %>').trigger('change');
 }
 
 

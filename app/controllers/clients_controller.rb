@@ -1,4 +1,6 @@
 class ClientsController < ApplicationController
+  before_filter :find_client, only: [:edit, :show, :update, :destroy]
+
   def new
     @client = Client.new
     @from_invoice = params[:fi] || 0
@@ -6,19 +8,16 @@ class ClientsController < ApplicationController
   end
 
   def edit
-    @client = Client.find(params[:id])
   end
 
   def show
-    @client = Client.find(params[:id])
   end
 
   def update
-    @client = Client.find(params[:id])
     if @client.update_attributes(params[:client])
-      redirect_to dashboard_index_path
+      flash.now[:notice] = 'Cliente aggiornato con successo'
+      redirect_to root_path
     else
-      flash.now[:error] = 'sdadas'
       render action: :edit
     end
   end
@@ -30,10 +29,11 @@ class ClientsController < ApplicationController
     @client = Client.new(params[:client])
     @from_invoice = params[:from_invoice]
     if @client.save
+      flash.now[:notice] = 'Cliente creato con successo'
       if @from_invoice == 1.to_s
         render 'update_invoice_form'
       else
-        redirect_to dashboard_index_path
+        redirect_to root_path
       end
     else
       render action: :edit
@@ -41,11 +41,16 @@ class ClientsController < ApplicationController
   end
 
   def destroy
-    @client = Client.find(params[:id])
     if @client.destroy
-      redirect_to dashboard_index_path
+      redirect_to root_path, notice: 'Cliente cancellato con successo'
     else
-      redirect_to dashboard_index_path
+      redirect_to root_path, alert: 'Errore nella cancellazione del cliente'
     end
   end
+
+  private
+
+    def find_client
+      @client = Client.find(params[:id])
+    end
 end

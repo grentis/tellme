@@ -37,10 +37,9 @@ Tellme::Application.routes.draw do
   #     end
   #   end
 
-  resources :dashboard
-
   constraints OnlyAjaxRequest.new do
     get 'month/:month/payments' => 'payments#by_month'
+    post 'session/filter_by_client' => 'sessions#filter_by_client', as: :filter_by_client
 
     resources :clients, only: [ :new, :edit, :show, :cancel, :create, :update ] do
       collection do
@@ -62,8 +61,15 @@ Tellme::Application.routes.draw do
     end
   end
 
-  resources :clients, only: [:destroy], constraints: OnlyHttpRequest.new
-  resources :invoices, only: [:destroy], constraints: OnlyHttpRequest.new
+  constraints OnlyHttpRequest.new do
+    get "login" => "sessions#new", as: :login
+    get "sessions" => "sessions#new"
+    get "logout" => "sessions#destroy", as: :logout
+
+    resources :clients, only: [:destroy]
+    resources :invoices, only: [:destroy]
+    resources :sessions, only: [:create]
+  end
 
   # Sample resource route with sub-resources:
   #   resources :products do

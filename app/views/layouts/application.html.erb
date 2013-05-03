@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tellme</title>
+  <title>Tellme | Dashboard</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -13,16 +13,21 @@
       <div class="navbar" style="margin-top:10px;">
         <div class="navbar-inner">
           <a class="brand" href="/">Tell Me</a>
-          <form class="navbar-form pull-left">
-            <%= select_tag :filter_client_id, (render partial: 'clients/option', collection: Client.all, as: :client) %>
-            <button type="submit" class="btn">Submit</button>
-          </form>
+          <%= form_tag filter_by_client_path, remote: true, class: 'navbar-form pull-left' do %>
+            <%= select_tag :filter_client_id, ((render partial: 'clients/option', locals: { client: Client.new, filter: @client_filter }) + (render partial: 'clients/option', collection: Client.all, as: :client, locals: { filter: @client_filter })), data: { placeholder: 'filtra per cliente', onchange: filter_by_client_path } %>
+            <%= link_to client_path(@client_filter || -1), remote: true, class: "filter-details btn btn-mini #{ @client_filter.blank? ? 'none' : '' }" do %>
+              <i class="icon-eye-open" title="Dettagli"></i> dettagli
+            <% end %>
+          <% end %>
           <div class="pull-right">
             <%= link_to new_client_path, class: 'btn btn-info', remote: true do %>
               <i class="icon-plus"></i> nuovo cliente
             <% end %>
             <%= link_to new_invoice_path, class: 'btn btn-info', remote: true do %>
               <i class="icon-plus"></i> nuova fattura
+            <% end %>
+            <%= link_to logout_path, class: 'btn btn-inverse' do %>
+              <i class="icon-leaf icon-white"></i> logout
             <% end %>
           </div>
         </div>

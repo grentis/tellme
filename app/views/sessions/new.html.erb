@@ -1,0 +1,12 @@
+<%= form_tag sessions_path, class: 'form-signin' do %>
+  <div class="content">
+    <h2 class="form-signin-heading">Tell me</h2>
+    <%= text_field_tag :username, params[:username], class: 'input-block-level', placeholder: 'username' %>
+    <%= password_field_tag :password, class: 'input-block-level', placeholder: 'password' %>
+  </div>
+  <div class="form-actions">
+    <%= button_tag type: :submit, class: 'btn btn-inverse' do %>
+      <i class="icon-leaf icon-white"></i> login
+    <% end %>
+  </div>
+<% end %>

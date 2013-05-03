@@ -16,7 +16,7 @@
           <span class="month"><%= month_as_string date.month %></span>
         </div>
         <div class="span9 payments">
-          <%= render "payments/payments", { payments: Payment.by_index(index) }%>
+          <%= render "payments/payments", { payments: Payment.for_index(index) }%>
         </div>
         <i></i>
       </div>

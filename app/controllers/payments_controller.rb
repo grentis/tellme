@@ -1,28 +1,33 @@
 class PaymentsController < ApplicationController
+  before_filter :find_payment, only: [:mark, :destroy]
 
   def by_month
-    render partial: "payments/payments", locals: { payments: Payment.by_index(params[:month].to_i) }
+    render partial: "payments/payments", locals: { payments: Payment.for_index(params[:month].to_i) }
   end
 
   def mark
-    @payment = Payment.find(params[:id])
     @payment.paid = !@payment.paid
     if @payment.save
       @expired = Payment.expired
       render :update_payment
     else
-      #TODO: mettere l'updare js del flash message
+      flash.now[:alert] = 'Si è verificato un errore'
       render nothing: true
     end
   end
 
   def destroy
-    @payment = Payment.find(params[:id])
     if @payment.destroy
-      redirect_to dashboard_index_path
+      redirect_to root_path, notice: 'Rata cancellata con successo'
     else
-      redirect_to dashboard_index_path
+      redirect_to root_path, alert: 'Errore nella cancellazione della rata'
     end
   end
+
+  private
+
+    def find_payment
+      @payment = Payment.find(params[:id])
+    end
 
 end

@@ -23,7 +23,7 @@ module ApplicationHelper
   end
 
   def show_note(note)
-    "<pre class=\"note\">#{note.blank? ? 'nessuna nota' : note}</pre>".html_safe
+    "<pre class=\"note\">#{note.blank? ? 'nessuna nota' : note}</pre>"
   end
 
 

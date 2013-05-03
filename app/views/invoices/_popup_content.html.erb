@@ -1,12 +1,12 @@
 <div class="invoice-popover">
-  <%= render partial: 'clients/details-data', locals: { client: invoice.client } %>
+  <%= render partial: 'clients/details-data', locals: { client: invoice.client, escape: false } %>
   <div class="invoice">
     <div class="row-fluid">
       <span class="span12">totale fattura: <%= write_currency invoice.amount %></span>
     </div>
     <div class="row-fluid">
       <span class="span12">
-        <%= show_note invoice.note %>
+        <%= show_note(invoice.note).html_safe %>
       </span>
     </div>
   </div>

@@ -361,7 +361,7 @@
 			var topPos = 0;
 	    switch ($(this.element).data('placement')) {
         case "top":
-          topPos = (offset.top - this.picker.outerHeight() - 10);
+          topPos = (offset.top - this.picker.outerHeight(true) - 10);
           this.picker.addClass('top');
           break;
         default:

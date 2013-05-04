@@ -66,7 +66,7 @@
             <%= builder.errors :value, class: 'help-block' %>
           </span>
           <span class="control-group span2 <%= builder.has_errors? :v_date %>">
-            <%= builder.text_field :v_date, class: 'span12 date', data: { 'date-type' => :month } %>
+            <%= builder.text_field :v_date, class: 'span12 date', data: { 'date-type' => :month, 'placement' => 'top' } %>
             <%= builder.errors :v_date, class: 'help-block' %>
           </span>
           <span class="control-group span5 <%= builder.has_errors? :note %>">

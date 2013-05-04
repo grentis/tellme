@@ -351,14 +351,26 @@
 		},
 
 		place: function(){
-						if(this.isInline) return;
+			if(this.isInline) return;
 			var zIndex = parseInt(this.element.parents().filter(function() {
-							return $(this).css('z-index') != 'auto';
-						}).first().css('z-index'))+10;
+				return $(this).css('z-index') != 'auto';
+			}).first().css('z-index'))+10;
 			var offset = this.component ? this.component.parent().offset() : this.element.offset();
 			var height = this.component ? this.component.outerHeight(true) : this.element.outerHeight(true);
+
+			var topPos = 0;
+	    switch ($(this.element).data('placement')) {
+        case "top":
+          topPos = (offset.top - this.picker.outerHeight() - 10);
+          this.picker.addClass('top');
+          break;
+        default:
+          topPos = (offset.top + height);
+          break;
+	    }
+
 			this.picker.css({
-				top: offset.top + height,
+				top: topPos,
 				left: offset.left,
 				zIndex: zIndex
 			});

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130418221641) do
+ActiveRecord::Schema.define(:version => 20130503140930) do
 
   create_table "clients", :force => true do |t|
     t.datetime "created_at",   :null => false
@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(:version => 20130418221641) do
     t.integer  "month",                         :null => false
     t.boolean  "paid",       :default => false, :null => false
     t.text     "note"
+  end
+
+  create_table "users", :force => true do |t|
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "username",      :null => false
+    t.string   "password_hash", :null => false
+    t.string   "password_salt", :null => false
   end
 
 end

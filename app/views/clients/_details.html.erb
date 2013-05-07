@@ -12,7 +12,7 @@
   </div>
 </div>
 <div class="modal-body">
-  <%= render partial: 'clients/details-data', locals: { client: client } %>
+  <%= render partial: 'clients/details-data', locals: { client: client, escape: true } %>
   <ul class="invoices">
     <li>Fatture</li>
     <% client.invoices.each do |invoice| %>
@@ -29,7 +29,7 @@
         </div>
         <div class="row-fluid">
           <span class="span12">
-             <%= show_note invoice.note %>
+             <%= show_note(invoice.note).html_safe %>
           </span>
         </div>
         <div class="row-fluid">
@@ -39,6 +39,12 @@
         </div>
       </li>
     <% end %>
+    <li>
+      &nbsp;
+      <div class="pull-right">
+        totale fatture: <%= write_currency client.total_invoices %> ( rate: <span class="alert-error"><%= write_currency client.total_expired_payments %></span> / <%= write_currency client.total_payments %> )
+      </div>
+    </li>
   </ul>
 </div>
 <div class="modal-footer">

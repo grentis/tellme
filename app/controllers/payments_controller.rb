@@ -11,7 +11,7 @@ class PaymentsController < ApplicationController
       @expired = Payment.expired
       render :update_payment
     else
-      flash.now[:alert] = 'Si è verificato un errore'
+      flash.now[:alert] = "Si e' verificato un errore"
       render nothing: true
     end
   end

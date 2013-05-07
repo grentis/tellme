@@ -15,7 +15,11 @@ class Invoice < ActiveRecord::Base
   before_validation :mark_payments_for_removal
 
   def balance
-    self.amount - self.payments.paid.sum(:value)
+    self.amount - self.total_payments
+  end
+
+  def total_expired_payments
+    self.payments.expired.sum(:value)
   end
 
   def total_payments

@@ -6,6 +6,12 @@
         <%= m.v_date %> - <%= write_currency m.value %>
       </li>
     <% end %>
+      <li>
+        <span class="label label-nocolor">&nbsp;</span>
+        <div class="pull-right">
+          totale: <%= write_currency invoice.amount %> ( rate: <span class="alert-error"><%= write_currency invoice.total_expired_payments %></span> / <%= write_currency invoice.total_payments %> )
+        </div>
+      </li>
   <% else %>
     <li>nessuna rata specificata</li>
   <% end %>

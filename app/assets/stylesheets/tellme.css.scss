@@ -27,6 +27,15 @@ html, body {
   clear:both;
 }
 
+.datepicker {
+  z-index:100000;
+
+  &.top {
+    &:before { content: ''; display: inline-block; border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom:0; border-top: 7px solid #ccc; border-top-color: rgba(0, 0, 0, 0.2); position: absolute; top:auto; bottom: -7px; left: 6px; } 
+    &:after { content: ''; display: inline-block; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom:0; border-top: 6px solid #ffffff; position: absolute; top:auto; bottom: -6px; left: 7px; }
+  }
+}
+
 .span1.checkbox {
   width:20px;
   padding:0;

@@ -73,9 +73,7 @@
                       ); return;
           case 'month': $this.datepicker(
                           $.extend(opts, {
-                            format: 'MM yyyy',
-                            minViewMode: 1,
-                            startView: 1
+                            format: 'dd MM yyyy'
                           })
                         ); return;
         }

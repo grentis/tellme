@@ -13,10 +13,11 @@
 
   window.TellMe = function() {
     var that = this;
-    setTimeout(function(){
-      that.init_everything($(document));
-    }, 100);
-
+    $(document).ready(function() {
+      setTimeout(function(){
+        that.init_everything($(document));
+      }, 100);
+    });
 
     this.currencyFieldKeyDown = $.proxy(this.currencyFieldKeyDown, this);
     this.currencyFieldKeyUp = $.proxy(this.currencyFieldKeyUp, this);

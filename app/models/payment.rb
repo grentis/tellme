@@ -35,6 +35,11 @@ class Payment < ActiveRecord::Base
     @v_date || ((I18n.localize(self.date, format: '%d %B %Y').titleize) unless self.date.blank?)
   end
 
+  def v_date=(v_date)
+    @v_date = v_date
+    set_date
+  end
+
   def index_in_invoice
     pos = 0
     invoice.payments.each do |payment|
@@ -46,6 +51,10 @@ class Payment < ActiveRecord::Base
 
   private
     def date_format
+      #set_date
+    end
+
+    def set_date
       if !@v_date.blank?
         begin
           temp = @v_date
@@ -56,6 +65,8 @@ class Payment < ActiveRecord::Base
           end
           self.date = Date.strptime(temp, '%d %B %Y')
         rescue
+          date_will_change!
+          self.date + 1.day - 1.day
           errors.add(:v_date, "formato non valido")
         end
       else

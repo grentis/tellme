@@ -4,4 +4,6 @@ if ($client_details.length <= 0) {
 }
 $client_details.html("<%= escape_javascript(render partial: 'details', locals: { client: @client }) %>").on('hidden', function(e) { $(this).remove(); } ).modal();
 
-window.tellMe.init_everything($client_details);
+setTimeout(function(){
+  window.tellMe.init_everything($client_details);
+}, 300);

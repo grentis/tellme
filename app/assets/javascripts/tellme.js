@@ -195,7 +195,7 @@
     .ajaxComplete(function(event, request, settings) {
       msg = request.getResponseHeader("X-Message")
       alert_type = 'alert-info'
-      if (request.getResponseHeader("X-Message-Type").indexOf("error") != -1)
+      if (request.getResponseHeader("X-Message-Type") && request.getResponseHeader("X-Message-Type").indexOf("error") != -1)
         alert_type = 'alert-error'
       if (msg) {
         $("#flash_hook").replaceWith("<div id='flash_hook'><p>&nbsp;</p><div class='row-fluid'><div class='span10 offset2'><div class='alert " + alert_type + "'><button type='button' class='close' data-dismiss='alert'>&times;</button>" + msg + "</div></div></div></div>").wait(800).hide();

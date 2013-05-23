@@ -19,7 +19,7 @@
       <li>
         <div class="row-fluid">
           <span class="span3">numero: <%= invoice.number %></span>
-          <span class="span4">data: <%= invoice.date.strftime("%d.%m.%Y" %></span>
+          <span class="span4">data: <%= invoice.date.strftime("%d.%m.%Y") %></span>
           <span class="span3">totale: <%= write_currency invoice.amount %></span>
           <span class="span2 actions">
             <%= link_to edit_invoice_path(invoice), remote: true, class: 'btn btn-mini' do %>

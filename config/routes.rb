@@ -39,6 +39,8 @@ Tellme::Application.routes.draw do
 
   constraints OnlyAjaxRequest.new do
     get 'month/:month/payments' => 'payments#by_month'
+    get 'payments/prevyear' => 'dashboard#prev_year', as: :prev_year
+    get 'payments/nextyear' => 'dashboard#next_year', as: :next_year
     post 'session/filter_by_client' => 'sessions#filter_by_client', as: :filter_by_client
 
     resources :clients, only: [ :new, :edit, :show, :cancel, :create, :update ] do

@@ -5,5 +5,5 @@ if ($client_form.length <= 0) {
 $client_form.html("<%= escape_javascript(render partial: 'form') %>").on('hidden', function(e) { $(this).remove(); } ).modal();
 
 setTimeout(function(){
-  window.tellMe.init_everything($client_form);
-}, 500);
+  window.tellMe.init_everything($('#client-form'));
+}, 200);

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :check_auth, :set_up_client_filter
+  before_filter :check_auth, :set_up_client_filter, :set_up_current_year
   after_filter :flash_to_headers
 
   def redirect_to(options = {}, response_status = {})
@@ -24,6 +24,10 @@ class ApplicationController < ActionController::Base
 
     def set_up_client_filter
       @client_filter = session[:client_filter]
+    end
+
+    def set_up_current_year
+      @current_year = session[:current_year] || 0
     end
 
     def flash_to_headers

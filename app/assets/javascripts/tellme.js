@@ -54,6 +54,7 @@
       });
     },
     init_clickover: function(context) {
+      console.log(context.find('.has-popup').length)
       $('.has-popup', context).clickover({
         html: true
       });

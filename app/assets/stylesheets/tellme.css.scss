@@ -1,10 +1,12 @@
-@import "compass/css3/border-radius";
-@import "compass/css3/box-shadow";
-@import "compass/css3/opacity";
+@import "compass/css3";
 
 html, body {
   height: 100%;
   font-size: 13px;
+}
+
+.page-container {
+  min-width: 1024px;
 }
 
 #flash_hook {
@@ -96,7 +98,7 @@ form {
 }
 
 .icon-checked {
-  width:18px;
+  /*width:18px;*/
   background:image-url('checked.png') 0 0;
 }
 .icon-checked-mini {
@@ -490,6 +492,119 @@ body.login {
     .form-signin-heading {
       padding: 7px 0;
       margin-bottom:5px;
+    }
+  }
+}
+
+#calendar {
+  .title {
+    color: #6495ED;
+    font-weight: bold;
+    font-size: 70px;
+    padding-top:5px;
+  }
+
+  .pag {
+    text-align: right;
+
+    .btn {
+      color: #6495ED;
+    }
+  }
+}
+
+.calendar {
+  margin-bottom: 50px;
+  width:100%;
+  border-collapse: collapse;
+
+  tr {
+    min-height: 200px;
+  }
+
+  td {
+    vertical-align: top;
+    border:1px solid #CCC;
+    width:(100% / 4);
+    padding: 5px;
+    @include box-sizing(border-box);
+
+    & > div {
+      min-height: 200px;
+      position:relative;
+    }
+
+    &.past {
+      background: #FAFAFA;
+      /*@include opacity(0.5);*/
+
+      &:hover {
+        /*@include opacity(1);*/
+      }
+    }
+
+    &.current {
+      background: lightyellow;
+    }
+  }
+
+  .tb-head {
+    display: block;
+    margin-bottom:5px;
+    font-size:30px;
+    line-height: 30px;
+    color:#999;
+  }
+
+  .payments, .payments ul {
+    margin:0;
+  }
+
+  .payments {
+    & > .total {
+      position:absolute;
+      top:3px;
+      right:3px;
+      font-size:14px;
+      font-weight: bold;
+    }
+  }
+
+  .payment.media {
+    font-size:12px;
+    
+    & > .label {
+      width:2px;
+      min-width: auto;
+      overflow: hidden;
+      text-indent: -100px;
+
+      &.label-info {
+        background:transparent;
+      }
+    }
+
+    & > .media-body {
+      & > .media-heading > .client {
+        display: inline-block;
+        font-size:12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width:66%;
+        white-space: nowrap;
+      }
+    }
+
+    & > .actions {
+      top:auto;
+      bottom:5px;
+      left:0;
+      text-align: left;
+      width:28px;
+
+      .lb {
+        display: none;
+      }
     }
   }
 }

@@ -42,7 +42,7 @@
     <li>
       &nbsp;
       <div class="pull-right">
-        totale fatture: <%= write_currency client.total_invoices %> ( rate: <span class="alert-error"><%= write_currency client.total_expired_payments %></span> / <%= write_currency client.total_payments %> )
+        totale fatture: <%= write_currency client.total_invoices %> ( in ritardo: <span class="alert-error"><%= write_currency client.total_expired_payments %></span> )
       </div>
     </li>
   </ul>

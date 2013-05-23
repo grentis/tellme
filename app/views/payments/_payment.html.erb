@@ -17,9 +17,9 @@
     <li>
       <%= link_to mark_payment_path(payment), method: :put, remote: true, class: 'btn btn-mini' do %>
         <% if payment.paid? %>
-          <i class="icon-unchecked" title="segna come non pagato"></i> non pagato
+          <i class="icon-unchecked" title="segna come non pagato"></i> marca come non pagato
         <% else %>
-          <i class="icon-checked" title="segna come pagato"></i> pagato
+          <i class="icon-checked" title="segna come pagato"></i> marca come pagato
         <% end %>
       <% end %>
     </li>

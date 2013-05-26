@@ -168,6 +168,8 @@ div {
 #expired {
   margin: 0 0 50px 0;
   float:left;
+  width:100%;
+  @include box-sizing(border-box);
   clear:both;
 
   & > :first-child, & > :nth-child(2) {

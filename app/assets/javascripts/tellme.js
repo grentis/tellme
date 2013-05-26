@@ -51,10 +51,11 @@
           $this.parent().find('.filter-details').addClass('none');
           $('.filtered').removeClass('filtered');
         }
+        window.tellMe.updateMonthTotal();
       });
+      window.tellMe.updateMonthTotal();
     },
     init_clickover: function(context) {
-      console.log(context.find('.has-popup').length)
       $('.has-popup', context).clickover({
         html: true
       });
@@ -80,6 +81,21 @@
                         ); return;
         }
       });
+    },
+    updateMonthTotal: function() {
+      var $months = $('#calendar .mm');
+      $months.each(function(){
+        var tot = 0;
+        $('.payment.media',this).not('.filtered').find('.subtot').each(function(){
+          tot += parseFloat($(this).html());
+        });
+        var val = $('.total .value', this);
+        if (tot == 0)
+          val.parent().hide();
+        else
+          val.html(tot.toFixed(2).replace(/\./,',') + " &euro;").parent().show();
+      });
+
     },
     expandField: function(e) {
       var $this = $(this);

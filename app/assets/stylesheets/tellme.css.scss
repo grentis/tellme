@@ -260,6 +260,10 @@ div {
       display: block;
     }
   }
+
+  & > .subtot {
+    display: none;
+  }
 }
 
 .payment.media .popover {
@@ -448,6 +452,7 @@ body.login {
 .calendar {
   margin-bottom: 50px;
   width:100%;
+  background-color:#FFF;
   border-collapse: collapse;
 
   tr {
@@ -499,6 +504,7 @@ body.login {
       right:3px;
       font-size:14px;
       font-weight: bold;
+      display: none;
     }
   }
 

@@ -8,7 +8,7 @@
     </h4>
     <span class="info">
       <span class="invoice has-popup" data-width="500px" data-placement="bottom" data-content='<%= render partial: 'invoices/popup_content', locals: { invoice: payment.invoice } %>' data-title='<%= render partial: 'invoices/popup_title', locals: { invoice: payment.invoice } %>'>
-        rata <%= payment.index_in_invoice %> di <%= payment.invoice.num_payments %> per la fattura n. <%= payment.invoice.number %> del <%= payment.invoice.date.strftime('%d/%b/%Y') %>
+        rata <%= payment.index_in_invoice %> di <%= payment.invoice.num_payments %> per la fattura n. <%= payment.invoice.number %> del <%= l payment.invoice.date, format: '%d/%b/%Y' %>
       </span>
       <span class="note"></span>
     </span>
@@ -17,9 +17,9 @@
     <li>
       <%= link_to mark_payment_path(payment), method: :put, remote: true, class: 'btn btn-mini' do %>
         <% if payment.paid? %>
-          <i class="icon-unchecked" title="segna come non pagato"></i> non pagato
+          <i class="icon-unchecked" title="segna come non pagato"></i><span class="lb"> marca come non pagato</span>
         <% else %>
-          <i class="icon-checked" title="segna come pagato"></i> pagato
+          <i class="icon-checked" title="segna come pagato"></i><span class="lb"> marca come pagato</span>
         <% end %>
       <% end %>
     </li>
@@ -29,4 +29,5 @@
       <% end %>
     </li-->
   </ul>
+  <span class="subtot"><%= payment.value %></span>
 </li>

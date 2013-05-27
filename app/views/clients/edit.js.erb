@@ -4,4 +4,6 @@ if ($client_form.length <= 0) {
 }
 $client_form.html("<%= escape_javascript(render partial: 'form') %>").on('hidden', function(e) { $(this).remove(); } ).modal();
 
-window.tellMe.init_everything($client_form);
+setTimeout(function(){
+  window.tellMe.init_everything($('#client-form'));
+}, 200);

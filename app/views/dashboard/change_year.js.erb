@@ -1,0 +1,5 @@
+$('#calendar').replaceWith("<%= escape_javascript(render partial: 'payments/calendar') %>")
+
+setTimeout(function(){
+  window.tellMe.init_everything($('#calendar'));
+}, 100);

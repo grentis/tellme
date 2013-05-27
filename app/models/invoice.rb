@@ -1,7 +1,7 @@
 class Invoice < ActiveRecord::Base
   attr_accessible :amount, :number, :date, :payments_attributes, :client_id, :note
 
-  has_many :payments, order: [:year, :month], dependent: :destroy
+  has_many :payments, order: [:date], dependent: :destroy
   belongs_to :client
 
   validates :client, presence: true

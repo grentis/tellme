@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="page-container">
-    <div class="container" style="position: relative">
+    <div class="container-fluid" style="position: relative">
       <div id="flash_hook"><%= show_flash %></div>
       <div class="navbar" style="margin-top:10px;">
         <div class="navbar-inner">
@@ -20,20 +20,12 @@
             <% end %>
           <% end %>
           <div class="pull-right">
-            <div class="btn-group">
-              <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="icon-plus"></i> aggiungi
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <%= link_to 'fattura', new_invoice_path, remote: true %>
-                </li>
-                <li>
-                  <%= link_to 'cliente', new_client_path, remote: true %>
-                </li>
-              </ul>
-            </div>
+            <%= link_to new_invoice_path, class: 'btn btn-primary', remote: true do %>
+              <i class="icon-plus"></i> nuova fattura
+            <% end %>
+            <%= link_to new_client_path, class: 'btn btn-primary', remote: true do %>
+              <i class="icon-plus"></i> nuovo cliente
+            <% end %>
             <%= link_to logout_path, class: 'btn btn-inverse' do %>
               <i class="icon-leaf icon-white"></i> logout
             <% end %>

@@ -13,10 +13,11 @@
 
   window.TellMe = function() {
     var that = this;
-    setTimeout(function(){
-      that.init_everything($(document));
-    }, 100);
-
+    $(document).ready(function() {
+      setTimeout(function(){
+        that.init_everything($(document));
+      }, 100);
+    });
 
     this.currencyFieldKeyDown = $.proxy(this.currencyFieldKeyDown, this);
     this.currencyFieldKeyUp = $.proxy(this.currencyFieldKeyUp, this);
@@ -50,7 +51,9 @@
           $this.parent().find('.filter-details').addClass('none');
           $('.filtered').removeClass('filtered');
         }
+        window.tellMe.updateMonthTotal();
       });
+      window.tellMe.updateMonthTotal();
     },
     init_clickover: function(context) {
       $('.has-popup', context).clickover({
@@ -73,13 +76,26 @@
                       ); return;
           case 'month': $this.datepicker(
                           $.extend(opts, {
-                            format: 'MM yyyy',
-                            minViewMode: 1,
-                            startView: 1
+                            format: 'dd MM yyyy'
                           })
                         ); return;
         }
       });
+    },
+    updateMonthTotal: function() {
+      var $months = $('#calendar .mm');
+      $months.each(function(){
+        var tot = 0;
+        $('.payment.media',this).not('.filtered').find('.subtot').each(function(){
+          tot += parseFloat($(this).html());
+        });
+        var val = $('.total .value', this);
+        if (tot == 0)
+          val.parent().hide();
+        else
+          val.html(tot.toFixed(2).replace(/\./,',') + " &euro;").parent().show();
+      });
+
     },
     expandField: function(e) {
       var $this = $(this);
@@ -196,7 +212,7 @@
     .ajaxComplete(function(event, request, settings) {
       msg = request.getResponseHeader("X-Message")
       alert_type = 'alert-info'
-      if (request.getResponseHeader("X-Message-Type").indexOf("error") != -1)
+      if (request.getResponseHeader("X-Message-Type") && request.getResponseHeader("X-Message-Type").indexOf("error") != -1)
         alert_type = 'alert-error'
       if (msg) {
         $("#flash_hook").replaceWith("<div id='flash_hook'><p>&nbsp;</p><div class='row-fluid'><div class='span10 offset2'><div class='alert " + alert_type + "'><button type='button' class='close' data-dismiss='alert'>&times;</button>" + msg + "</div></div></div></div>").wait(800).hide();

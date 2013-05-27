@@ -1,10 +1,12 @@
-@import "compass/css3/border-radius";
-@import "compass/css3/box-shadow";
-@import "compass/css3/opacity";
+@import "compass/css3";
 
 html, body {
   height: 100%;
   font-size: 13px;
+}
+
+.page-container {
+  min-width: 1024px;
 }
 
 #flash_hook {
@@ -64,11 +66,11 @@ form {
   margin:0;
 
   &.navbar-form {
-    width:410px;
+    width:510px;
 
     .select2-container {
       margin-top:5px;
-      width:340px;
+      width:440px;
     }
   }
 
@@ -96,7 +98,7 @@ form {
 }
 
 .icon-checked {
-  width:18px;
+  /*width:18px;*/
   background:image-url('checked.png') 0 0;
 }
 .icon-checked-mini {
@@ -164,13 +166,30 @@ div {
 }
 
 #expired {
-  margin: 0 0 30px 0;
+  margin: 0 0 50px 0;
+  float:left;
+  width:100%;
+  @include box-sizing(border-box);
+  clear:both;
 
-  & > :first-child {
+  & > :first-child, & > :nth-child(2) {
     border:0;
 
-    &:hover {
+    /*&:hover {
       background-color:transparent;
+    }*/
+  }
+
+  .payment.media {
+    float:left;
+    width:49%;
+
+    .actions {
+      top:auto;
+      right: 5px;
+      bottom: 3px;
+      text-align: right;
+      width:auto;
     }
   }
 }
@@ -241,6 +260,10 @@ div {
       display: block;
     }
   }
+
+  & > .subtot {
+    display: none;
+  }
 }
 
 .payment.media .popover {
@@ -282,91 +305,6 @@ ul.list-payments {
       color: #333;
       text-shadow: none;
     }
-  }
-}
-
-#timeline {
-  height:500px;
-  overflow-y:hidden;
-  position:relative;
-  @include box-shadow(inset 0 2px 2px -1px rgba(0, 0, 0, .1));
-
-  .t-month {
-    position:relative;
-    border-bottom: 1px solid #CCC;
-    @include opacity(0.5);
-
-    &.active {
-      @include opacity(1);
-
-      .date {
-        .year {
-          color: darken(#EEE, 20%);
-        }
-        .month {
-         color: darken(#CCC, 20%);
-        }
-      }
-    }
-
-    .total {
-      position:absolute;
-      bottom:20px;
-      right:720px;
-
-      .value {
-        padding-left:5px;
-        font-size:17.5px;
-        font-weight:bold;
-      }
-    }
-  }
-
-  .date {
-    padding-top:20px;
-
-    span {
-      display: block;
-      text-align: right;
-    }
-
-    .year {
-      font-size:46px;
-      letter-spacing:0;
-      line-height:46px;
-      font-weight:bold;
-      color:darken(#EEE, 8%);
-    }
-    .month {
-      font-size:26px;
-      line-height:16px;
-      letter-spacing:1px;
-      color:darken(#CCC, 10%);
-    }
-  }
-
-  .payments {
-    border-left: 1px solid #CCC;
-    min-height: 150px;
-
-    & > ul {
-      margin-left: 0;
-    }
-  }
-
-  .payment.media {
-    border:0;
-    padding:15px 0;
-  }
-
-  .label-info {
-    visibility: hidden;
-  }
-
-  .actions {
-    top:auto;
-    bottom:10px;
-    margin:0;
   }
 }
 
@@ -490,6 +428,121 @@ body.login {
     .form-signin-heading {
       padding: 7px 0;
       margin-bottom:5px;
+    }
+  }
+}
+
+#calendar {
+  .title {
+    color: #6495ED;
+    font-weight: bold;
+    font-size: 70px;
+    padding-top:2px;
+  }
+
+  .pag {
+    text-align: right;
+
+    .btn {
+      color: #6495ED;
+    }
+  }
+}
+
+.calendar {
+  margin-bottom: 50px;
+  width:100%;
+  background-color:#FFF;
+  border-collapse: collapse;
+
+  tr {
+    min-height: 200px;
+  }
+
+  td {
+    vertical-align: top;
+    border:1px solid #CCC;
+    width:(100% / 4);
+    padding: 5px;
+    @include box-sizing(border-box);
+
+    & > div {
+      min-height: 200px;
+      position:relative;
+    }
+
+    &.past {
+      background: #FAFAFA;
+      /*@include opacity(0.5);*/
+
+      &:hover {
+        /*@include opacity(1);*/
+      }
+    }
+
+    &.current {
+      background: lightyellow;
+    }
+  }
+
+  .tb-head {
+    display: block;
+    margin-bottom:5px;
+    font-size:30px;
+    line-height: 30px;
+    color:#999;
+  }
+
+  .payments, .payments ul {
+    margin:0;
+  }
+
+  .payments {
+    & > .total {
+      position:absolute;
+      top:3px;
+      right:3px;
+      font-size:14px;
+      font-weight: bold;
+      display: none;
+    }
+  }
+
+  .payment.media {
+    font-size:12px;
+    
+    & > .label {
+      width:2px;
+      min-width: auto;
+      overflow: hidden;
+      text-indent: -100px;
+
+      &.label-info {
+        background:transparent;
+      }
+    }
+
+    & > .media-body {
+      & > .media-heading > .client {
+        display: inline-block;
+        font-size:12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width:66%;
+        white-space: nowrap;
+      }
+    }
+
+    & > .actions {
+      top:auto;
+      bottom:5px;
+      left:0;
+      text-align: left;
+      width:28px;
+
+      .lb {
+        display: none;
+      }
     }
   }
 }

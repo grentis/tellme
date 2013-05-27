@@ -1,0 +1,12 @@
+<% 
+  date = Helper::get_date_by_index index - Date.today.month 
+  diff = index + @current_year * 12 - Date.today.month
+%>
+<td class="mm <%= diff < 0 ? 'past' : diff == 0 ? 'current' : 'future' %>">
+  <div>
+    <span class="tb-head"><%= month_as_string date.month %></span>
+    <div class="span12 payments">
+      <%= render "payments/payments", { payments: Payment.for_index(diff) }%>
+    </div>
+  </div>
+</td>

@@ -1,4 +1,4 @@
-fattura n. <%= invoice.number %> del <%= invoice.date.strftime('%d %B %Y') %>
+fattura n. <%= invoice.number %> del <%= l invoice.date, format: '%d %B %Y' %>
 <ul class="actions">
   <li>
     <%= link_to edit_invoice_path(invoice), remote: true, class: 'btn btn-mini' do %>

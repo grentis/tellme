@@ -14,7 +14,7 @@
         <div class="navbar-inner">
           <a class="brand" href="/">Tell Me</a>
           <%= form_tag filter_by_client_path, remote: true, class: 'navbar-form pull-left' do %>
-            <%= select_tag :filter_client_id, ((render partial: 'clients/option', locals: { client: Client.new, filter: @client_filter }) + (render partial: 'clients/option', collection: Client.all, as: :client, locals: { filter: @client_filter })), data: { placeholder: 'filtra per cliente', onchange: filter_by_client_path } %>
+            <%= select_tag :filter_client_id, ((render partial: 'clients/option', locals: { client: Client.new, filter: @client_filter }) + (render partial: 'clients/option', collection: Client.find(:all, order: :name), as: :client, locals: { filter: @client_filter })), data: { placeholder: 'filtra per cliente', onchange: filter_by_client_path } %>
             <%= link_to client_path(@client_filter || -1), remote: true, class: "filter-details btn btn-mini #{ @client_filter.blank? ? 'none' : '' }" do %>
               <i class="icon-eye-open" title="Dettagli"></i> dettagli
             <% end %>

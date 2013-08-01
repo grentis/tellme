@@ -209,6 +209,11 @@
       tellMe.init_everything(event.field);
     })
     .delegate('span.expand a', 'click', tellMe.expandClientSection)
+    .delegate('form.form-invoice .f-payments .fields:first input.currency', 'focus', function(){
+      var $field = $(this);
+      if ($field.val() == '') 
+        $field.val($('#invoice_amount').val());
+    })
     .ajaxComplete(function(event, request, settings) {
       msg = request.getResponseHeader("X-Message")
       alert_type = 'alert-info'

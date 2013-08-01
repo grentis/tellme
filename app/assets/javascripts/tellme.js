@@ -92,8 +92,11 @@
         var val = $('.total .value', this);
         if (tot == 0)
           val.parent().hide();
-        else
-          val.html(tot.toFixed(2).replace(/\./,',') + " &euro;").parent().show();
+        else {
+          tot = (tot.toFixed(2) + "").replace(/\./,",").split(",")
+          tot[0] = tot[0].split('').reverse().join('').match(/.{1,3}/g).join('.').split('').reverse().join('');
+          val.html(tot.join(",") + " &euro;").parent().show();
+        }
       });
 
     },

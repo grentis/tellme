@@ -485,10 +485,13 @@ body.login {
 
     &.past {
       background: #FAFAFA;
-      /*@include opacity(0.5);*/
 
-      &:hover {
-        /*@include opacity(1);*/
+      & > div {
+        min-height: 0px;
+      }
+
+      .payments ul {
+        display: none;
       }
     }
 

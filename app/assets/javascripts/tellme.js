@@ -211,10 +211,13 @@
       tellMe.init_everything(event.field);
     })
     .delegate('span.expand a', 'click', tellMe.expandClientSection)
-    .delegate('form.form-invoice .f-payments .fields:first input.currency', 'focus', function(){
+    .delegate('form.form-invoice .f-payments .fields:first input.currency', 'focus', function(event){
       var $field = $(this);
       if ($field.val() == '') 
         $field.val($('#invoice_amount').val());
+    })
+    .delegate('.mm.past', 'click', function(event){
+      $('.payments > ul', $(this)).toggle();
     })
     .ajaxComplete(function(event, request, settings) {
       msg = request.getResponseHeader("X-Message")

@@ -31,7 +31,7 @@ module ActionView
         end
         options["type"]  ||= field_type
         options["value"] = options.fetch("value"){ value_before_type_cast(object) } unless field_type == "file"
-        options["value"] = number_with_precision(options["value"], precision: 2).to_s.gsub('.', ',') unless options["value"].blank? 
+        options["value"] = number_with_precision(options["value"], precision: 2, delimiter: '.', separator: ',') unless options["value"].blank? 
         options["value"] &&= ERB::Util.html_escape(options["value"])
         add_default_name_and_id(options)
         tag("input", options)

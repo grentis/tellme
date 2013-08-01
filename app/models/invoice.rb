@@ -27,7 +27,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def amount=(amount)
-    write_attribute(:amount, amount.to_s.gsub(',', '.'))
+    write_attribute(:amount, amount.to_s.gsub('.', '').gsub(',', '.'))
   end
 
   def num_payments

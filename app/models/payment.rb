@@ -28,7 +28,7 @@ class Payment < ActiveRecord::Base
   end
 
   def value=(value)
-    write_attribute(:value, value.to_s.gsub(',', '.'))
+    write_attribute(:value, value.to_s.gsub('.', '').gsub(',', '.'))
   end
 
   def v_date

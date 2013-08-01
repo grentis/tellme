@@ -126,9 +126,11 @@
       var decimalSeparator = ",";
       var str = field.val();
       if (str.length == 0) return;
-      var p = parseFloat(str.replace(/,/,".")).toFixed(2);
+      var p = parseFloat(str.replace(/\./,"").replace(/,/,".")).toFixed(2);
       if (isNaN(p)) p = "";
-      field.val(p.replace(/\./,decimalSeparator));
+      p = p.replace(/\./,decimalSeparator).split(",")
+      p[0] = p[0].split('').reverse().join('').match(/.{1,3}/g).join('.').split('').reverse().join('');
+      field.val(p.join(','));
     },
     currencyFieldKeyDown: function(e) {
       var getPos = function(o){

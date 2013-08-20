@@ -339,6 +339,17 @@ ul.list-payments {
       text-shadow: none;
     }
   }
+
+  pre.note {
+    font-size:10px;
+    float:right;
+    width: 250px;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    padding-left:20px;
+    background-position:0 4px;
+  }
 }
 
 .invoice-popover, #client-details {

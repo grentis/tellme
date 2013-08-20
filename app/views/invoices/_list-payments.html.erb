@@ -4,6 +4,7 @@
       <li>
         <span class="label label-<%= m.paid? ? 'success' : m.expired? ? 'important' : 'nocolor'%> ">&nbsp;</span>
         <%= m.v_date %> - <%= write_currency m.value %>
+        <%= show_note m.note %>
       </li>
     <% end %>
       <li>

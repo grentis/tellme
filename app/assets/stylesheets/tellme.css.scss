@@ -91,6 +91,18 @@ form {
   }
 }
 
+.help-block {
+  margin-bottom: 0;
+}
+
+select, textarea, input[type="text"], input[type="password"], 
+  input[type="datetime"], input[type="datetime-local"], input[type="date"], 
+  input[type="month"], input[type="time"], input[type="week"], 
+  input[type="number"], input[type="email"], input[type="url"], input[type="search"], 
+  input[type="tel"], input[type="color"], .uneditable-input {
+    margin-bottom: 0;
+  }
+
 .control-group.error .control-label,
 .control-group.error .help-block,
 .control-group.error .help-inline {
@@ -473,10 +485,13 @@ body.login {
 
     &.past {
       background: #FAFAFA;
-      /*@include opacity(0.5);*/
 
-      &:hover {
-        /*@include opacity(1);*/
+      & > div {
+        min-height: 0px;
+      }
+
+      .payments ul {
+        display: none;
       }
     }
 

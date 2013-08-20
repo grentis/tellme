@@ -92,8 +92,11 @@
         var val = $('.total .value', this);
         if (tot == 0)
           val.parent().hide();
-        else
-          val.html(tot.toFixed(2).replace(/\./,',') + " &euro;").parent().show();
+        else {
+          tot = (tot.toFixed(2) + "").replace(/\./,",").split(",")
+          tot[0] = tot[0].split('').reverse().join('').match(/.{1,3}/g).join('.').split('').reverse().join('');
+          val.html(tot.join(",") + " &euro;").parent().show();
+        }
       });
 
     },
@@ -126,9 +129,11 @@
       var decimalSeparator = ",";
       var str = field.val();
       if (str.length == 0) return;
-      var p = parseFloat(str.replace(/,/,".")).toFixed(2);
+      var p = parseFloat(str.replace(/\./,"").replace(/,/,".")).toFixed(2);
       if (isNaN(p)) p = "";
-      field.val(p.replace(/\./,decimalSeparator));
+      p = p.replace(/\./,decimalSeparator).split(",")
+      p[0] = p[0].split('').reverse().join('').match(/.{1,3}/g).join('.').split('').reverse().join('');
+      field.val(p.join(','));
     },
     currencyFieldKeyDown: function(e) {
       var getPos = function(o){
@@ -209,6 +214,14 @@
       tellMe.init_everything(event.field);
     })
     .delegate('span.expand a', 'click', tellMe.expandClientSection)
+    .delegate('form.form-invoice .f-payments .fields:first input.currency', 'focus', function(event){
+      var $field = $(this);
+      if ($field.val() == '') 
+        $field.val($('#invoice_amount').val());
+    })
+    .delegate('.mm.past', 'click', function(event){
+      $('.payments > ul', $(this)).toggle();
+    })
     .ajaxComplete(function(event, request, settings) {
       msg = request.getResponseHeader("X-Message")
       alert_type = 'alert-info'

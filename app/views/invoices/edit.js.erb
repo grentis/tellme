@@ -4,16 +4,16 @@ if ($invoice_form.length <= 0) {
 }
 $invoice_form.html("<%= escape_javascript(render partial: 'form') %>").on('hidden', function(e) { $(this).remove(); } ).modal();
 
+setTimeout(function(){
+  window.tellMe.init_everything($('#invoice-form'));
 
-window.tellMe.init_everything($('#invoice-form'));
-
-$('#invoice_client_id').select2({
-  formatResult: function(state) {
-    return window.tellMe.clientSelect2Format(state);
-  },
-  formatSelection: function(state) {
-    return window.tellMe.clientSelect2Format(state);
-  },
-  escapeMarkup: function(m) { return m; }
-});
-
+  $('#invoice_client_id').select2({
+    formatResult: function(state) {
+      return window.tellMe.clientSelect2Format(state);
+    },
+    formatSelection: function(state) {
+      return window.tellMe.clientSelect2Format(state);
+    },
+    escapeMarkup: function(m) { return m; }
+  });
+}, 100);

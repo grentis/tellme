@@ -33,7 +33,7 @@ html, body {
   z-index:100000;
 
   &.top {
-    &:before { content: ''; display: inline-block; border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom:0; border-top: 7px solid #ccc; border-top-color: rgba(0, 0, 0, 0.2); position: absolute; top:auto; bottom: -7px; left: 6px; } 
+    &:before { content: ''; display: inline-block; border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom:0; border-top: 7px solid #ccc; border-top-color: rgba(0, 0, 0, 0.2); position: absolute; top:auto; bottom: -7px; left: 6px; }
     &:after { content: ''; display: inline-block; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom:0; border-top: 6px solid #ffffff; position: absolute; top:auto; bottom: -6px; left: 7px; }
   }
 }
@@ -95,10 +95,10 @@ form {
   margin-bottom: 0;
 }
 
-select, textarea, input[type="text"], input[type="password"], 
-  input[type="datetime"], input[type="datetime-local"], input[type="date"], 
-  input[type="month"], input[type="time"], input[type="week"], 
-  input[type="number"], input[type="email"], input[type="url"], input[type="search"], 
+select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"], input[type="date"],
+  input[type="month"], input[type="time"], input[type="week"],
+  input[type="number"], input[type="email"], input[type="url"], input[type="search"],
   input[type="tel"], input[type="color"], .uneditable-input {
     margin-bottom: 0;
   }
@@ -196,10 +196,27 @@ div {
     float:left;
     width:49%;
 
+    & > .label {
+      font-size: 11px;
+      margin-left: 5px;
+    }
+
+    & > .media-body {
+      & > h4 {
+        & > .client {
+          width: 75%;
+          display: inline-block;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+    }
+
     .actions {
       top:auto;
       right: 5px;
-      bottom: 3px;
+      bottom: 5px;
       text-align: right;
       width:auto;
     }
@@ -221,12 +238,13 @@ div {
   .label {
     min-width: 100px;
     text-align:center;
-    margin:3px 0 0 5px;
+    margin:0;
   }
 
   h4 {
-    font-size: 15px;
-    margin-bottom: 2px;
+    font-size: 13px;
+    line-height:15px;
+    margin-bottom: 0;
 
     .client {
       cursor:pointer;
@@ -239,11 +257,14 @@ div {
     margin-right: 10px;
     display: inline-block;
     text-align: right;
+    vertical-align: top;
   }
 
   .info {
     margin-left: 113px;
     cursor:pointer;
+    font-size:12px;
+    line-height:18px;
   }
 
   .actions {
@@ -490,7 +511,7 @@ body.login {
         min-height: 0px;
       }
 
-      .payments ul {
+      .payments > ul {
         display: none;
       }
     }
@@ -525,10 +546,10 @@ body.login {
 
   .payment.media {
     font-size:12px;
-    
+
     & > .label {
       width:2px;
-      min-width: auto;
+      min-width: 2px;
       overflow: hidden;
       text-indent: -100px;
 
@@ -550,7 +571,7 @@ body.login {
 
     & > .actions {
       top:auto;
-      bottom:5px;
+      bottom:2px;
       left:0;
       text-align: left;
       width:28px;

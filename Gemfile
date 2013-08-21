@@ -11,6 +11,8 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 
 gem 'nested_form', git: "git://github.com/ryanb/nested_form.git"
 
+gem 'heroku'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

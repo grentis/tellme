@@ -41,6 +41,8 @@ Tellme::Application.routes.draw do
     get 'month/:month/payments' => 'payments#by_month'
     get 'payments/prevyear' => 'dashboard#prev_year', as: :prev_year
     get 'payments/nextyear' => 'dashboard#next_year', as: :next_year
+    post 'backup' => 'backup#create', as: :create_backup
+    post 'backup_task' => 'backup#create_task', as: :create_backup_task
     post 'session/filter_by_client' => 'sessions#filter_by_client', as: :filter_by_client
 
     resources :clients, only: [ :new, :edit, :show, :cancel, :create, :update ] do
@@ -67,6 +69,7 @@ Tellme::Application.routes.draw do
     get "login" => "sessions#new", as: :login
     get "sessions" => "sessions#new"
     get "logout" => "sessions#destroy", as: :logout
+    get 'get_backup' => 'backup#get', as: :get_backup
 
     resources :clients, only: [:destroy]
     resources :invoices, only: [:destroy]

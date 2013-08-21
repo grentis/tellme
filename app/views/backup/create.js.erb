@@ -1,0 +1,13 @@
+$('div.dbdownload').remove();
+var $dbdownback = $('<div class="modal-backdrop in"><div class="loader"></div></div>').appendTo($('body'));
+$.ajax({
+  type: 'POST',
+  url: '<%= create_backup_task_path %>',
+  success: function(data){
+    var $a = $("<a>download</a>").attr('href', data.url);
+    $('<div class="alert alert-success dbdownload">Il backup è stato creato ed è disponibile per il </div>').append($a).appendTo($('body'))
+  },
+  complete: function(){
+    $dbdownback.remove();
+  }
+});

@@ -47,6 +47,26 @@ html, body {
   margin-right:10px;
 }
 
+div.loader {
+  background: image-url('ajax-loader.gif') no-repeat center center;
+  width: 220px;
+  height:20px;
+  position:absolute;
+  z-index:1041;
+  top:60px;
+  left:50%;
+  margin-left:-110px;
+}
+
+div.dbdownload {
+  position: absolute;
+  top: 30px;
+  width: 400px;
+  left: 50%;
+  margin-left: -200px;
+  text-align: center;
+}
+
 pre {
   margin:0;
   display: inline-block;

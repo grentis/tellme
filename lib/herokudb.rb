@@ -12,7 +12,6 @@ class Herokudb
     @client = Heroku::Client::Pgbackups.new ENV["PGBACKUPS_URL"]
     @pgbackup = @client.create_transfer(Herokudb.db_url, Herokudb.db_url, nil, "BACKUP", :expire => true)
     until @pgbackup["finished_at"]
-      print "."
       sleep 1
       @pgbackup = @client.get_transfer @pgbackup["id"]
     end

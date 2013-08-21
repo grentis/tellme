@@ -26,6 +26,26 @@
             <%= link_to new_client_path, class: 'btn btn-primary', remote: true do %>
               <i class="icon-plus"></i> nuovo cliente
             <% end %>
+            <div class="btn-group">
+              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="icon-wrench"></i> amministrazione
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to create_backup_path, method: :post, remote: true do %>
+                    <i class="icon-file"></i> nuovo backup
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to get_backup_path do %>
+                    <i class="icon-download"></i> download ultimo backup
+                  <% end %>
+                </li>
+                <!--li class="divider"></li>
+                <li><a tabindex="-1" href="#"><i class="icon-retweet"></i> archivia fatture</a></li-->
+              </ul>
+            </div>
             <%= link_to logout_path, class: 'btn btn-inverse' do %>
               <i class="icon-leaf icon-white"></i> logout
             <% end %>

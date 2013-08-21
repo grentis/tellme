@@ -216,11 +216,14 @@
     .delegate('span.expand a', 'click', tellMe.expandClientSection)
     .delegate('form.form-invoice .f-payments .fields:first input.currency', 'focus', function(event){
       var $field = $(this);
-      if ($field.val() == '') 
+      if ($field.val() == '')
         $field.val($('#invoice_amount').val());
     })
     .delegate('.mm.past', 'click', function(event){
       $('.payments > ul', $(this)).toggle();
+    })
+    .delegate('div.dbdownload a', 'click', function(event){
+      $(this).parent().remove();
     })
     .ajaxComplete(function(event, request, settings) {
       msg = request.getResponseHeader("X-Message")

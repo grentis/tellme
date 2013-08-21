@@ -3,8 +3,9 @@ class BackupController < ApplicationController
   end
 
   def create_task
-    @db = Herokudb.get_last_backup_url #Herokudb.capture
-    sleep 10
+    @db = Herokudb.capture
+    #@db = Herokudb.get_last_backup_url
+    #sleep 50
     render json: { url: @db }
   end
 

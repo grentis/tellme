@@ -227,6 +227,10 @@
     .delegate('div.dbdownload a', 'click', function(event){
       $(this).parent().remove();
     })
+    .delegate('a.print', 'click', function(event){
+      window.print();
+      return false;
+    })
     .ajaxComplete(function(event, request, settings) {
       msg = request.getResponseHeader("X-Message")
       alert_type = 'alert-info'

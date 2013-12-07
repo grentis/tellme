@@ -2,7 +2,7 @@ var $invoice_form = $('#invoice-form');
 if ($invoice_form.length <= 0) {
   $invoice_form = $('<div class="modal container" id="invoice-form"></div>').appendTo($('body'))
 }
-$invoice_form.html("<%= escape_javascript(render partial: 'form') %>").on('hidden', function(e) { $(this).remove(); } ).modal();
+$invoice_form.html("<%= escape_javascript(render partial: 'form') %>").on('hidden', function(e) { $(this).empty().remove(); } ).modal();
 
 setTimeout(function(){
   window.tellMe.init_everything($('#invoice-form'));

@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag    "print", :media => "print" %>
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
   <div class="row-fluid">
@@ -5,6 +6,7 @@
       <h3>Dettaglio cliente</h3>
     </span>
     <span class="actions pull-right">
+      <a href="#" class="btn btn-mini print"><i class="icon-print"></i> stampa</a>
       <%= link_to edit_client_path(client), remote: true, class: 'btn btn-mini' do %>
         <i class="icon-pencil"></i> modifica
       <% end %>

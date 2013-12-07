@@ -1,0 +1,74 @@
+@page {
+  margin: 5mm 5mm 5mm 5mm;
+}
+
+body {
+  -webkit-print-color-adjust: exact; 
+  width:100% !important;
+}
+
+button, .actions, .page-container, .modal-footer, .modal-header {
+  display: none !important;
+}
+
+.modal-scrollable {
+  position:relative;
+  width:100%;
+}
+
+#client-details {
+  position: relative;
+  width:100% !important;
+  margin-left:0 !important;
+  left:0 !important;
+  right:0;
+  border:0;
+
+  .client {
+    .name {
+      font-size:24.5px;
+      padding-bottom:5px;
+      width:100%;
+      border-bottom:1px dotted #333;
+    }
+
+    .expand {
+      display: none;
+    }
+
+    .exp {
+      display: block;
+      border-bottom:2px solid #333;
+    }
+  }
+
+  pre.note {
+    background: url(/assets/note.png) no-repeat 0 6px !important;
+  }
+
+  ul.list-payments {
+    background: url(/assets/list.png) no-repeat 0 9px !important;
+
+    .label-important {
+      background-color: #b94a48 !important;
+    }
+
+    .label-success {
+      background-color: #468847 !important;
+    }
+
+    .pull-right {
+      font-weight: bold;
+    }
+  }
+
+  .invoices {
+    .pull-right {
+      font-weight: bold;
+    }
+
+    li {
+      page-break-inside:avoid;
+    }
+  }
+}

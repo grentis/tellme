@@ -47,20 +47,16 @@
       </span>
     </div>
     <div class="control-group row-fluid f-payments">
-      <% unless @invoice.new_record? %>
-        <span class="span1 checkbox"></span>
-      <% end %>
+      <span class="span1 checkbox"></span>
       <span class="span2">Importo</span>
       <span class="span2">Data</span>
       <span class="span5 offset2">Nota pagamento</span>
       <%= f.fields_for :payments do |builder| %>
         <div class="row-fluid single-payment">
-          <% unless @invoice.new_record? %>
-            <span class="control-group span1 checkbox <%= builder.has_errors? :paid %>">
-              <%= builder.check_box :paid, class: 'span12' %>
-              <%= builder.errors :paid, class: 'help-block' %>
-            </span>
-          <% end %>
+          <span class="control-group span1 checkbox <%= builder.has_errors? :paid %>">
+            <%= builder.check_box :paid, class: 'span12' %>
+            <%= builder.errors :paid, class: 'help-block' %>
+          </span>
           <span class="control-group span2 <%= builder.has_errors? :value %>">
             <%= builder.currency_field :value, class: 'span12 currency' %>
             <%= builder.errors :value, class: 'help-block' %>

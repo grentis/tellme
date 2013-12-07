@@ -214,8 +214,10 @@
       tellMe.init_everything(event.field);
     })
     .delegate('span.expand a', 'click', tellMe.expandClientSection)
-    .delegate('form.form-invoice .f-payments .fields:first input.currency', 'focus', function(event){
+    .delegate('form.form-invoice .f-payments .fields:first input.currency, form.form-invoice .f-payments .fields:first input[type="checkbox"]', 'focus', function(event){
       var $field = $(this);
+      if ($field.is(':checkbox'))
+        $field = $('input', $field.parent().next());
       if ($field.val() == '')
         $field.val($('#invoice_amount').val());
     })

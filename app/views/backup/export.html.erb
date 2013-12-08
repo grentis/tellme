@@ -1,0 +1,31 @@
+**************************************************************************
+Esportazione del <%= l Time.now, format: '%d %B %Y' %>
+**************************************************************************
+
+
+<% @clients.each do |client| %>
+cliente <%= write_safe_txt client.name %>
+==========================================================================
+indirizzo: <%= write_safe_txt client.address %>
+iva: <%= client.iva.ljust(15) %> codice fiscale: <%= client.cf %>
+tipo di pagamento: <%= write_safe_txt client.payment_type %>
+banca: <%= write_safe_txt client.bank %>
+abi: <%= client.abi.ljust(8) %> cab: <%= client.cab %>
+costo orario: <%= client.hourly_cost %>
+note: <%= write_safe_txt client.note %>
+
+<%= client.invoices.count %> <%= client.invoices.count == 1 ? 'fattura' : 'fatture' %> [totale: <%= write_currency_txt client.total_invoices %> / ritardo: <%= write_currency_txt client.total_expired_payments %>]:
+  <% client.invoices.each do |invoice| %>
+  ------------------------------------------------------------------------
+    fattura n. <%= invoice.number.to_s.rjust(6) %>    [<%= l invoice.date, format: '%d/%b/%Y' %>] - <%= write_currency_txt(invoice.amount).to_s.rjust(15) %>
+    note: <%= write_safe_txt invoice.note %>
+    <% invoice.payments.each do |payment| %>
+        rata n. <%= payment.index_in_invoice.to_s.ljust(5) %> <%= (payment.paid ? 'PAGATA' : 'NON PAGATA').ljust(10) %>  [<%= l payment.date, format: '%d/%b/%Y' %>] - <%= write_currency_txt(payment.value).to_s.rjust(15) %> 
+            note: <%= write_safe_txt payment.note %>
+    <% end %>
+  <% end %>
+
+==========================================================================
+
+
+<% end %>

@@ -42,8 +42,13 @@
                     <i class="icon-download"></i> download ultimo backup
                   <% end %>
                 </li>
-                <!--li class="divider"></li>
-                <li><a tabindex="-1" href="#"><i class="icon-retweet"></i> archivia fatture</a></li-->
+                <li class="divider"></li>
+                <li>
+                  <%= link_to export_path, method: :get do %>
+                    <i class="icon-file"></i> esporta dati
+                  <% end %>
+                </li>
+                <!--li><a tabindex="-1" href="#"><i class="icon-retweet"></i> archivia fatture</a></li-->
               </ul>
             </div>
             <%= link_to logout_path, class: 'btn btn-inverse' do %>

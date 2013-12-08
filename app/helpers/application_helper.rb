@@ -57,7 +57,19 @@ module ApplicationHelper
   end
 
   def write_currency(value)
-    number_to_currency(value, unit: "&euro;", format: "%n %u", separator: ",", delimiter: ".")
+    write_currency_format(value, "&euro;", "%n %u")
+  end
+
+  def write_currency_txt(value)
+    write_currency_format(value, "€", "%n%u")
+  end
+
+  def write_safe_txt(value)
+    value.html_safe unless value == nil
+  end
+
+  def write_currency_format(value, unit, format)
+    number_to_currency(value, unit: unit, format: format, separator: ",", delimiter: ".")
   end
 
   def show_flash

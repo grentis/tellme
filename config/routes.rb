@@ -70,6 +70,7 @@ Tellme::Application.routes.draw do
     get "sessions" => "sessions#new"
     get "logout" => "sessions#destroy", as: :logout
     get 'get_backup' => 'backup#get', as: :get_backup
+    get 'export' => 'backup#export', as: :export
 
     resources :clients, only: [:destroy]
     resources :invoices, only: [:destroy]

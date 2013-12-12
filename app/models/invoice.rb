@@ -1,18 +1,18 @@
 class Invoice < ActiveRecord::Base
-  attr_accessible :amount, :number, :date, :payments_attributes, :client_id, :note
+  attr_accessible :amount, :number, :date, :payments_attributes, :client_id, :note, :year
 
   has_many :payments, order: [:date], dependent: :destroy
   belongs_to :client
 
   validates :client, presence: true
   validates :client_id, presence: true
-  validates :number, presence: true
+  validates :number, presence: true, uniqueness: { scope: :year, message: 'n. fattura già inserito' }
   validates :date, presence: true
   validates :amount, presence: true
 
   accepts_nested_attributes_for :payments, allow_destroy: true
 
-  before_validation :mark_payments_for_removal
+  before_validation :mark_payments_for_removal, :extract_year
 
   def balance
     self.amount - self.total_payments
@@ -52,5 +52,9 @@ class Invoice < ActiveRecord::Base
       self.payments.each do |p|
         p.destroy if p.should_be_deleted?
       end
+    end
+
+    def extract_year
+      self.year = self.date.nil? ? Time.now.year : self.date.year
     end
 end

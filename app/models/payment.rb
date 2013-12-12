@@ -17,14 +17,14 @@ class Payment < ActiveRecord::Base
 
   before_validation :date_format
 
-  attr_accessor :v_date, :_destroy
+  attr_accessor :v_date
 
   def expired?
     !self.paid && (self.date <= Date.today)
   end
 
   def should_be_deleted?
-    @v_date.blank? && self.value.blank? && self.note.blank?
+    (@v_date.blank? && self.value.blank? && self.note.blank?) || self.destroyed? || self.marked_for_destruction?
   end
 
   def value=(value)

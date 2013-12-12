@@ -76,10 +76,13 @@
           </span>
         </div>
       <% end %>
-      <%= f.link_to_add :payments, class: 'btn btn-mini' do %>
-        <i class="icon-plus"></i> aggiungi rata
-      <% end %>
     </div>
+    <div class="control-group <%= f.has_errors? :payments %>">
+      <%= f.errors :payments, class: 'help-block' %>
+    </div>
+    <%= f.link_to_add :payments, data: {target: ".f-payments"}, class: 'btn btn-mini' do %>
+      <i class="icon-plus"></i> aggiungi rata
+    <% end %>
   </div>
   <div class="modal-footer">
     <% unless @invoice.new_record? %>

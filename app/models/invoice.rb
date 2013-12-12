@@ -9,6 +9,7 @@ class Invoice < ActiveRecord::Base
   validates :number, presence: true, uniqueness: { scope: :year, message: 'n. fattura già inserito' }
   validates :date, presence: true
   validates :amount, presence: true
+  validate :validate_payments
 
   accepts_nested_attributes_for :payments, allow_destroy: true
 
@@ -56,5 +57,9 @@ class Invoice < ActiveRecord::Base
 
     def extract_year
       self.year = self.date.nil? ? Time.now.year : self.date.year
+    end
+
+    def validate_payments
+      errors.add(:payments, "specificare almeno una rata") if self.payments.reject{ |p| p.destroyed? || p.marked_for_destruction? }.length < 1
     end
 end

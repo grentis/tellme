@@ -2,7 +2,7 @@
   <div class="content">
     <h2 class="form-signin-heading">Tell me</h2>
     <%= text_field_tag :username, params[:username], class: 'input-block-levels', placeholder: 'username' %>
-    <%= password_field_tag :password, class: 'input-block-level', placeholder: 'password' %>
+    <%= password_field_tag :password, nil, class: 'input-block-level', placeholder: 'password' %>
   </div>
   <div class="form-actions">
     <%= button_tag type: :submit, class: 'btn btn-inverse' do %>

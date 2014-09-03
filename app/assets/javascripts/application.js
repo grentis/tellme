@@ -20,7 +20,4 @@
 //= require bootstrap-clickover
 //= require locales/bootstrap-datepicker.it
 //= require select2
-//= require jquery.scrollTo-min
-//= require jquery.mousewheel
 //= require tellme
-//= require dashboard

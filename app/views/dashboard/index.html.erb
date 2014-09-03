@@ -1,6 +1,7 @@
 <ul id="expired" class="well">
   <% if @expired.size > 0 %>
     <%= render :partial => "payments/payment", :collection => @expired, as: :payment %>
+    <li class="payment total media"><h4>Totale: <span class="value"></span></h4></li>
   <% else %>
     <li class="payment media">Hurra! non ci sono ritardi nei pagamenti</li>
   <% end %>

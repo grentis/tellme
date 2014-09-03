@@ -1,4 +1,4 @@
-$('#expired').html('<%= escape_javascript(render :partial => "payments/payment", :collection => @expired, as: :payment) %>');
+$('#expired').html('<%= escape_javascript(render :partial => "payments/payment", :collection => @expired, as: :payment) %>' + '<li class="payment total media"><h4>Totale: <span class="value"></span></h4></li>');
 $('.payments #payment_<%= @payment.id %>').replaceWith('<%= escape_javascript(render partial: "payment", locals: { payment: @payment, source: "timeline" }) %>');
 
 setTimeout(function(){

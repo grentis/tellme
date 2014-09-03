@@ -42,7 +42,7 @@
         $this.closest('form').trigger('submit');
         $('.filtered').removeClass('filtered');
         if (e.val) {
-          $('.payment.media[data-client!='+e.val+']').addClass('filtered');
+          $('.payment.media[data-client!='+e.val+']').not('.total').addClass('filtered');
           var $l = $this.parent().find('.filter-details');
           var h = $l.attr('href').split("/");
           h[h.length - 1] = e.val;
@@ -52,8 +52,10 @@
           $('.filtered').removeClass('filtered');
         }
         window.tellMe.updateMonthTotal();
+        window.tellMe.updateExpiredTotal();
       });
       window.tellMe.updateMonthTotal();
+      window.tellMe.updateExpiredTotal();
     },
     init_clickover: function(context) {
       $('.has-popup', context).clickover({
@@ -98,7 +100,17 @@
           val.html(tot.join(",") + " &euro;").parent().show();
         }
       });
-
+    },
+    updateExpiredTotal: function() {
+      var tot = 0;
+      $('#expired .payment').not('.filtered').find('.subtot').each(function(){
+        tot += parseFloat($(this).html());
+      });;
+      console.log(tot);
+      var val = $('#expired .payment.total .value');
+      tot = (tot.toFixed(2) + "").replace(/\./,",").split(",")
+      tot[0] = tot[0].split('').reverse().join('').match(/.{1,3}/g).join('.').split('').reverse().join('');
+      val.html(tot.join(",") + " &euro;").parent().show();
     },
     expandField: function(e) {
       var $this = $(this);

@@ -8,7 +8,7 @@ class Payment < ActiveRecord::Base
   scope :expired, include: [{:invoice => :client}], conditions: ["paid = :paid and payments.date <= :date", { paid: false, date: Date.today }], order: ['clients.name, payments.date']
   scope :for_index, Proc.new { |index|
     d = Helper::get_date_by_index index
-    includes([{:invoice => :client}]).where("payments.date >= :first and payments.date <= :last", { first: d.beginning_of_month, last: d.end_of_month }).order(:id) unless index.nil?
+    includes([{:invoice => :client}]).where("payments.date >= :first and payments.date <= :last", { first: d.beginning_of_month, last: d.end_of_month }).order('clients.name, invoices.id') unless index.nil?
   }
 
   validates :v_date, presence: true

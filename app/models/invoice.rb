@@ -4,6 +4,10 @@ class Invoice < ActiveRecord::Base
   has_many :payments, order: [:date], dependent: :destroy
   belongs_to :client
 
+  scope :by_year, Proc.new { |year|
+    includes([:client]).where("year = :year", { year: Date.today.year + year }) unless year.nil?
+  }
+
   validates :client, presence: true
   validates :client_id, presence: true
   validates :number, presence: true, uniqueness: { scope: :year, message: 'n. fattura già inserito' }

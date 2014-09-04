@@ -71,6 +71,7 @@ Tellme::Application.routes.draw do
     get "logout" => "sessions#destroy", as: :logout
     get 'get_backup' => 'backup#get', as: :get_backup
     get 'export' => 'backup#export', as: :export
+    get 'export_year' => 'backup#export_year', as: :export_year
 
     resources :clients, only: [:destroy]
     resources :invoices, only: [:destroy]

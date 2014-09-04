@@ -1,0 +1,8 @@
+<% if @invoices.count > 0 %>
+<% @invoices.each do |invoice| %>
+n. <%= invoice.number.to_s.rjust(6) %> - [<%= l invoice.date, format: '%d/%b/%Y' %>] - <%= write_currency_txt(invoice.amount).to_s.rjust(15) %> - <%= write_safe_txt invoice.client.name %>
+----------------------------------------------------------------------------------
+<% end %>
+<% else %>
+nessuna fattura inserita per l'anno selezionato
+<% end %>

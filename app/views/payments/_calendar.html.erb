@@ -4,6 +4,9 @@
       <%= (Date.today + @current_year.year).year %>
     </div>
     <div class="span6 pag">
+      <%= link_to export_year_path, class: 'btn btn-mini', target: '_blank' do %>
+        <i class="icon-download"></i> Esporta
+      <% end %>
       <%= link_to prev_year_path, remote: true, class: 'btn btn-mini' do %>
         <i class="icon-circle-arrow-left"></i> <%= (Date.today + (@current_year - 1).year).year %>
       <% end %>

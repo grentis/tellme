@@ -6,4 +6,3 @@ if ($invoice_form.length > 0) {
   $('#filter_client_id').append("<%= escape_javascript(render partial: 'option', locals: { client: @client, filter: @client_filter }) %>").val('<%= @client.id %>').trigger('change');
 }
 
-

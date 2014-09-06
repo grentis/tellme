@@ -16,9 +16,17 @@
 <div class="modal-body">
   <%= render partial: 'clients/details-data', locals: { client: client, escape: true } %>
   <ul class="invoices">
-    <li>Fatture</li>
+    <li>
+      Fatture
+      <span class="years pull-right">
+        <% years = client.invoices.map{|a| a.year}.uniq %>
+        <% years.each do |year| %>
+          <button class="js-cd-year btn btn-mini <%= year == years.last ? 'btn-primary' : '' %>"><%= year %></button>
+        <% end %>
+      </span>
+    </li>
     <% client.invoices.each do |invoice| %>
-      <li>
+      <li class="sin-invoice" data-year="<%= invoice.year %>">
         <div class="row-fluid">
           <span class="span3">numero: <%= invoice.number %></span>
           <span class="span4">data: <%= invoice.date.strftime("%d.%m.%Y") %></span>
@@ -41,12 +49,14 @@
         </div>
       </li>
     <% end %>
-    <li>
-      &nbsp;
-      <div class="pull-right">
-        totale fatture: <%= write_currency client.total_invoices %> ( in ritardo: <span class="alert-error"><%= write_currency client.total_expired_payments %></span> )
-      </div>
-    </li>
+    <% years.each do |year| %>
+      <li class="sin-invoice" data-year="<%= year %>">
+        &nbsp;
+        <div class="pull-right">
+          totale fatture: <%= write_currency client.total_invoices_by_year(year) %> ( in ritardo: <span class="alert-error"><%= write_currency client.total_expired_payments_by_year(year) %></span> )
+        </div>
+      </li>
+    <% end %>
   </ul>
 </div>
 <div class="modal-footer">

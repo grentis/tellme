@@ -29,6 +29,7 @@
       this.init_datepicker(context);
       this.init_clickover(context);
       this.init_filterClientSelect(context);
+      this.init_filterYear(context);
     },
     init_filterClientSelect: function(context) {
       $('#filter_client_id', context).select2({
@@ -56,6 +57,12 @@
       });
       window.tellMe.updateMonthTotal();
       window.tellMe.updateExpiredTotal();
+    },
+    init_filterYear: function(context) {
+      if (!context.is('#client-details')) return;
+      var selected_year = $('.invoices .years button.btn-primary', context).html();
+      var invoices = $('.invoices li.sin-invoice', context);
+      invoices.hide().filter('[data-year="' + selected_year + '"]').show();
     },
     init_clickover: function(context) {
       $('.has-popup', context).clickover({
@@ -106,7 +113,6 @@
       $('#expired .payment').not('.filtered').find('.subtot').each(function(){
         tot += parseFloat($(this).html());
       });;
-      console.log(tot);
       var val = $('#expired .payment.total .value');
       tot = (tot.toFixed(2) + "").replace(/\./,",").split(",")
       tot[0] = tot[0].split('').reverse().join('').match(/.{1,3}/g).join('.').split('').reverse().join('');
@@ -241,6 +247,14 @@
     })
     .delegate('a.print', 'click', function(event){
       window.print();
+      return false;
+    })
+    .delegate('button.js-cd-year', 'click', function(event){
+      var $this = $(this);
+      if ($this.is('.btn-primary')) return;
+      $this.parent().children().removeClass('btn-primary');
+      $this.addClass('btn-primary');
+      window.tellMe.init_everything($('#client-details'));
       return false;
     })
     .ajaxComplete(function(event, request, settings) {

@@ -8,7 +8,7 @@ class Herokudb
     #@client.get_latest_backup["public_url"]
 
     @client = Heroku::Client::HerokuPostgresqlApp.new Herokudb.heroku_appname
-    @client.transfers_public_url(@client.transfers[0][:uuid])[:url]
+    @client.transfers_public_url(@client.transfers.sort_by{ |k| k[:updated_at]}.reverse[0][:uuid])[:url]
   end
 
   def self.capture
